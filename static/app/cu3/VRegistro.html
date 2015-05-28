@@ -1,0 +1,42 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" 
+                    data-toggle="collapse" 
+                    data-target="#contenido-plegable">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" ></span>
+        </div>
+        <div class="collapse navbar-collapse" id="contenido-plegable">
+            <ul class="nav navbar-nav navbar-left">
+<li><a ng-click="VPrincipal0()">
+  Regresar</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+<li class="navbar-text" ng-show="usuario.nombre" ng-bind="usuario.nombre"></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <form name="fRegistroForm" ng-submit="ARegistro1(fRegistroForm.$valid)" novalidate>
+            <div class="form-group" ng-class="{ 'has-error' :  fRegistroSubmitted && fRegistroForm.nombres.$invalid && fRegistroForm.nombres.$pristine && fRegistroSubmitted}"><label for="fRegistro_nombres">Nombres</label><input id="fRegistro_nombres" type="text" name="nombres" class="form-control" ng-model="fRegistro.nombres" placeholder="Nombres"  ng-minlength="2" ng-maxlength="128"/><p ng-show="fRegistroSubmitted && fRegistroForm.nombres.$invalid" class="help-block">Error en campo Nombres.</p></div>
+            <div class="form-group" ng-class="{ 'has-error' :  fRegistroSubmitted && fRegistroForm.apellidos.$invalid && fRegistroForm.apellidos.$pristine && fRegistroSubmitted}"><label for="fRegistro_apellidos">Apellidos</label><input id="fRegistro_apellidos" type="text" name="apellidos" class="form-control" ng-model="fRegistro.apellidos" placeholder="Apellidos"  ng-minlength="2" ng-maxlength="128"/><p ng-show="fRegistroSubmitted && fRegistroForm.apellidos.$invalid" class="help-block">Error en campo Apellidos.</p></div>
+            <div class="form-group" ng-class="{ 'has-error' :  fRegistroSubmitted && fRegistroForm.nickname.$invalid && fRegistroForm.nickname.$pristine && fRegistroSubmitted}"><label for="fRegistro_nickname">Nickname</label><input id="fRegistro_nickname" type="text" name="nickname" class="form-control" ng-model="fRegistro.nickname" placeholder="Nickname" required ng-minlength="2" ng-maxlength="128"/><p ng-show="fRegistroSubmitted && fRegistroForm.nickname.$invalid" class="help-block">Error en campo Nickname.</p></div>
+            <div class="form-group" ng-class="{ 'has-error' :  fRegistroSubmitted && fRegistroForm.contrasena.$invalid && fRegistroForm.contrasena.$pristine && fRegistroSubmitted}"><label for="fRegistro_contrasena">Contraseña</label><input id="fRegistro_contrasena" type="text" name="contrasena" class="form-control" ng-model="fRegistro.contrasena" placeholder="Contraseña" required ng-minlength="2" ng-maxlength="16"/><p ng-show="fRegistroSubmitted && fRegistroForm.contrasena.$invalid" class="help-block">Error en campo Contraseña.</p></div>
+            <div class="form-group" ng-class="{ 'has-error' :  fRegistroSubmitted && fRegistroForm.edad.$invalid && fRegistroForm.edad.$pristine && fRegistroSubmitted}"><label for="fRegistro_edad">Edad</label><input id="fRegistro_edad" type="number" name="edad" class="form-control" ng-model="fRegistro.edad" placeholder="Edad"  ng-minlength="1" ng-maxlength="3"/><p ng-show="fRegistroSubmitted && fRegistroForm.edad.$invalid" class="help-block">Error en campo Edad.</p></div>
+            <div class="form-group" ng-class="{ 'has-error' :  fRegistroSubmitted && fRegistroForm.telefono.$invalid && fRegistroForm.telefono.$pristine && fRegistroSubmitted}"><label for="fRegistro_telefono">Telefono</label><input id="fRegistro_telefono" type="text" name="telefono" class="form-control" ng-model="fRegistro.telefono" placeholder="Telefono" required/><p ng-show="fRegistroSubmitted && fRegistroForm.telefono.$invalid" class="help-block">Error en campo Telefono.</p></div>
+            <div class="form-group" ng-class="{ 'has-error' :  fRegistroSubmitted && fRegistroForm.correo.$invalid && fRegistroForm.correo.$pristine && fRegistroSubmitted}"><label for="fRegistro_correo">Correo</label><input id="fRegistro_correo" type="email" name="correo" class="form-control" ng-model="fRegistro.correo" placeholder="Correo" required ng-pattern="/[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/"/><p ng-show="fRegistroSubmitted && fRegistroForm.correo.$invalid" class="help-block">Error en campo Correo.</p></div>
+            <div class="form-group" ng-class="{ 'has-error' :  fRegistroSubmitted && fRegistroForm.administrador.$invalid && fRegistroForm.administrador.$pristine && fRegistroSubmitted}"><label for="fRegistro_administrador">Administrador [S|N]</label><input id="fRegistro_administrador" type="text" name="administrador" class="form-control" ng-model="fRegistro.administrador" placeholder="Administrador [S|N]" required ng-minlength="1" ng-maxlength="1" ng-pattern="/(s|n)/i"/><p ng-show="fRegistroSubmitted && fRegistroForm.administrador.$invalid" class="help-block">Error en campo Administrador [S|N].</p></div>
+        <button type="submit" class="btn btn-perso btn-lg btn-block">
+            <span class="glyphicon glyphicon-flash"></span>Registro
+        </button>
+    </form>
+    <hr />
+
+
+<div id="right"></div>

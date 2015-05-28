@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+<h2>Caso_Administrador</h2>
+<p></p>
+<ol>
+ <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/ACrearEvento'</li>
+   <li>Método: POST</li><li>Formato de entrada y salida: JSON</li>
+Parámetros GET: Formulario
+<li>Parámetros POST:
+    <ul>     <li>nombre -  
+Requerido. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>128</code>. 
+     </li>     <li>descripccion -  
+Requerido. 
+     </li>     <li>ubicacion -  
+Requerido. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>256</code>. 
+     </li>     <li>fecha -  
+Requerido. 
+Long. mínima: <code>10</code>. 
+Long. máxima: <code>10</code>. 
+     </li>     <li>capacidad -  
+Requerido. 
+     </li>     <li>disponibilidad -  
+Requerido. 
+Long. mínima: <code>1</code>. 
+Long. máxima: <code>10000000000000000000</code>. 
+     </li>     <li>afiche -  
+Opcional. 
+     </li>
+    </ul>
+   </li>
+   <li>Roles: administrador </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+<p>Precondición: eventoValido(nombre,descripccion,ubicacion,fecha,capacidad,disponibilidad,afiche).</p>
+<p>Postcondicion: existeEvento(nombre,descripccion,ubicacion,fecha,capacidad,disponibilidad,afiche).</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalAdministrador',</li>
+       <li> msg:"Evento Creado".</li>
+      </ul>
+     </li>
+     <li>
+<p>Precondición: ¬eventoValido(nombre,descripccion,ubicacion,fecha,capacidad,disponibilidad,afiche).</p>
+<p>Postcondicion: true.</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VCrearEvento',</li>
+       <li> msg:"Evento No Creado".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/VPrincipalAdministrador'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/AModificarEvento'</li>
+   <li>Método: POST</li><li>Formato de entrada y salida: JSON</li>
+<li>Parámetros POST:
+    <ul>     <li>nombre -  
+Requerido. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>128</code>. 
+     </li>     <li>descripccion -  
+Requerido. 
+     </li>     <li>ubicacion -  
+Requerido. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>256</code>. 
+     </li>     <li>fecha -  
+Requerido. 
+Long. mínima: <code>10</code>. 
+Long. máxima: <code>10</code>. 
+     </li>     <li>capacidad -  
+Requerido. 
+     </li>     <li>disponibilidad -  
+Requerido. 
+Long. mínima: <code>1</code>. 
+Long. máxima: <code>10000000000000000000</code>. 
+     </li>     <li>afiche -  
+Opcional. 
+     </li>
+    </ul>
+   </li>
+   <li>Roles: administrador </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+<p>Precondición: eventoValido(nombre,descripccion,ubicacion,fecha,capacidad,disponibilidad,afiche) and creador(nickname,idevento).</p>
+<p>Postcondicion: existeEvento(nombre,descripccion,ubicacion,fecha,capacidad,disponibilidad,afiche).</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VVerEvento',</li>
+       <li> msg:"Evento Modificado".</li>
+      </ul>
+     </li>
+     <li>
+<p>Precondición: ¬eventoValido(nombre,descripccion,ubicacion,fecha,capacidad,disponibilidad,afiche) or ¬creador(nickname,idevento).</p>
+<p>Postcondicion: true.</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VModificarEvento',</li>
+       <li> msg:"Evento No Modificado".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/VVerEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/AEliminarEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+<p>Precondición: creador(nickname,idevento).</p>
+<p>Postcondicion: ¬existeEvento(idevento).</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalAdministrador',</li>
+       <li> msg:"Evento Eliminado".</li>
+      </ul>
+     </li>
+     <li>
+<p>Precondición: ¬creador(nickname,idevento).</p>
+<p>Postcondicion: true.</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VVerEvento',</li>
+       <li> msg:"Evento No Eliminado".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p><br></p>
+  <ul>
+   <li>URL: '/cu1/VModificarEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+Parámetros GET: id
+   <li>Roles: administrador </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/AVerEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+<p>Precondición: creador(nickname,idevento).</p>
+<p>Postcondicion: eventoMostrado(idevento).</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VVerEvento',</li>
+       <li> msg:"Evento Visto".</li>
+      </ul>
+     </li>
+     <li>
+<p>Precondición: ¬creador(nickname,idevento).</p>
+<p>Postcondicion: true.</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalAdministrador',</li>
+       <li> msg:"Evento No Visto".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p><br></p>
+  <ul>
+   <li>URL: '/cu1/VCrearEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/APersonaAsistio'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: Sin restricción de rol
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VVerEvento',</li>
+       <li> msg:"Asistencia Confirmada".</li>
+      </ul>
+     </li>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VVerEvento',</li>
+       <li> msg:"Asistencia No Confirmada".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li>
+</ol>
+<h2>Caso_Usuario</h2>
+<p></p>
+<ol>
+ <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/AVerEventosInscritos'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventosInscritos',</li>
+       <li> msg:"Vistos Inscritos".</li>
+      </ul>
+     </li>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalUsuario',</li>
+       <li> msg:"No Vistos Inscritos".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VPrincipalUsuario'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/AVerEventosNoInscritos'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventosNoInscritos',</li>
+       <li> msg:"Vistos No Inscritos".</li>
+      </ul>
+     </li>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalUsuario',</li>
+       <li> msg:"No Vistos No Inscritos".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VEventosInscritos'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/AVerEventoInscrito'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventoInscrito',</li>
+       <li> msg:"Visto Inscrito".</li>
+      </ul>
+     </li>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventosInscritos',</li>
+       <li> msg:"No Visto Inscrito".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VEventoInscrito'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/ACertificado'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventoInscrito',</li>
+       <li> msg:"Certificado obtenido".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VEventosNoInscritos'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/ACredencial'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventoInscrito',</li>
+       <li> msg:"Credencial recibida".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/AVerEventoNoInscrito'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventoNoInscrito',</li>
+       <li> msg:"Visto No Inscrito".</li>
+      </ul>
+     </li>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventosNoInscritos',</li>
+       <li> msg:"No Visto No Inscrito".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VEventoNoInscrito'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/AReservarEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventosInscritos',</li>
+       <li> msg:"Reservado".</li>
+      </ul>
+     </li>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventosNoInscritos',</li>
+       <li> msg:"No Reservado".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li>
+</ol>
+<h2>Caso_Principal</h2>
+<p></p>
+<ol>
+ <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu3/ARegistro'</li>
+   <li>Método: POST</li><li>Formato de entrada y salida: JSON</li>
+<li>Parámetros POST:
+    <ul>     <li>nombres -  
+Opcional. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>128</code>. 
+     </li>     <li>apellidos -  
+Opcional. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>128</code>. 
+     </li>     <li>nickname -  
+Requerido. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>128</code>. 
+     </li>     <li>contrasena -  
+Requerido. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>16</code>. 
+     </li>     <li>edad -  
+Opcional. 
+Long. mínima: <code>1</code>. 
+Long. máxima: <code>3</code>. 
+     </li>     <li>telefono -  
+Requerido. 
+     </li>     <li>correo -  
+Requerido. 
+Expresión de validación: <code>/[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/</code>. 
+     </li>     <li>administrador - <br> 
+Requerido. 
+Long. mínima: <code>1</code>. 
+Long. máxima: <code>1</code>. 
+Expresión de validación: <code>/(s|n)/i</code>. 
+     </li>
+    </ul>
+   </li>
+   <li>Roles: Sin restricción de rol
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+<p>Precondición: nuevoUsuarioValido(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
+<p>Postcondicion: existeUsuario(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipal',</li>
+       <li> msg:"Registrado".</li>
+      </ul>
+     </li>
+     <li>
+<p>Precondición: ¬nuevoUsuarioValido(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
+<p>Postcondicion: true.</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VRegistro',</li>
+       <li> msg:"No Registrado".</li>
+      </ul>
+     </li>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipal',</li>
+       <li> msg:"Volver".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu3/VPrincipal'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: Sin restricción de rol
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu3/AIdentificacion'</li>
+   <li>Método: POST</li><li>Formato de entrada y salida: JSON</li>
+<li>Parámetros POST:
+    <ul>     <li>unickname -  
+Requerido. 
+     </li>     <li>ucontrasena -  
+Requerido. 
+     </li>
+    </ul>
+   </li>
+   <li>Roles: Sin restricción de rol
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li><br>
+<p>Precondición: usuarioValido(nickname,ucontrasena) and ¬usuarioEsAdmin(nickname).</p>
+<p>Postcondicion: iniciadaSesion(nickname).</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalUsuario',</li>
+       <li> msg:"Vista de Usuario".</li>
+      </ul>
+<p>Se continúa con el rol de usuario.</p>
+     </li>
+     <li>
+<p>Precondición: usuarioValido(nickname,ucontrasena) and usuarioEsAdmin(nickname).</p>
+<p>Postcondicion: iniciaSesionAdmin(nickname).</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalAdministrador',</li>
+       <li> msg:"Vista de Administrador".</li>
+      </ul>
+<p>Se continúa con el rol de administrador.</p>
+     </li>
+     <li>
+<p>Precondición: ¬usuarioValido(nickname,ucontrasena).</p>
+<p>Postcondicion: ¬iniciadaSesion().</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipal',</li>
+       <li> msg:"No Identificado".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu3/VRegistro'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: Sin restricción de rol
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu3/ASalir'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador usuario </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipal',</li>
+       <li> msg:"Sesion Cerrada".</li>
+      </ul>
+<p>Se continúa sin rol específico.</p>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li>
+</ol>
+
+</html>

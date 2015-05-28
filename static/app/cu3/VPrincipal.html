@@ -1,0 +1,36 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" 
+                    data-toggle="collapse" 
+                    data-target="#contenido-plegable">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" ></span>
+        </div>
+        <div class="collapse navbar-collapse" id="contenido-plegable">
+            <ul class="nav navbar-nav navbar-left">
+<li><a ng-click="VRegistro0()">
+  Registrarse</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+<li class="navbar-text" ng-show="usuario.nombre" ng-bind="usuario.nombre"></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <form name="fUsuarioForm" ng-submit="AIdentificacion1(fUsuarioForm.$valid)" novalidate>
+            <div class="form-group" ng-class="{ 'has-error' :  fUsuarioSubmitted && fUsuarioForm.unickname.$invalid && fUsuarioForm.unickname.$pristine && fUsuarioSubmitted}"><label for="fUsuario_unickname">unickname</label><input id="fUsuario_unickname" type="text" name="unickname" class="form-control" ng-model="fUsuario.unickname" placeholder="unickname" required/><p ng-show="fUsuarioSubmitted && fUsuarioForm.unickname.$invalid" class="help-block">Error en campo unickname.</p></div>
+            <div class="form-group" ng-class="{ 'has-error' :  fUsuarioSubmitted && fUsuarioForm.ucontrasena.$invalid && fUsuarioForm.ucontrasena.$pristine && fUsuarioSubmitted}"><label for="fUsuario_ucontrasena">ucontrasena</label><input id="fUsuario_ucontrasena" type="password" name="ucontrasena" class="form-control" ng-model="fUsuario.ucontrasena" placeholder="ucontrasena" required/><p ng-show="fUsuarioSubmitted && fUsuarioForm.ucontrasena.$invalid" class="help-block">Error en campo ucontrasena.</p></div>
+        <button type="submit" class="btn btn-perso btn-lg btn-block">
+            <span class="glyphicon glyphicon-flash"></span>Conectarse
+        </button>
+    </form>
+    <hr />
+
+
+<div id="right"></div>
