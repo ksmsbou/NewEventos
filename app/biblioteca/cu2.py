@@ -2,6 +2,7 @@
 from flask import request, session, Blueprint, json
 
 cu2 = Blueprint('cu2', __name__)
+from app import db, models
 
 
 @cu2.route('/cu2/ACertificado')
@@ -182,6 +183,11 @@ def VEventosNoInscritos():
     if "actor" in session:
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
+    #events = models.Event.query.filter(models.Event.creador != session['usrid'])
+    #e = []
+    #for event in events:
+    #    e.append({'idEvento':event.idEvent,'nombre':event.nombre,'fecha':event.fecha})
+    #res['data?'] = e
 
 
     #Action code ends here
