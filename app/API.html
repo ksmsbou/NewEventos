@@ -245,6 +245,34 @@ Parámetros GET: id
     </ol>
    </li>
   </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/AVerEventosAdmin'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalAdministrador',</li>
+       <li> msg:"Eventos Listados".</li>
+      </ul>
+     </li>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalAdministrador',</li>
+       <li> msg:"Eventos No Listados".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
  </li>
 </ol>
 <h2>Caso_Usuario</h2>
@@ -585,7 +613,7 @@ Requerido.
 <p>Postcondicion: iniciaSesionAdmin(nickname).</p>
       <p>resultado:</p>
       <ul>
-       <li>label:'/VPrincipalAdministrador',</li>
+       <li>label:'/AVerEventosAdmin',</li>
        <li> msg:"Vista de Administrador".</li>
       </ul>
 <p>Se continúa con el rol de administrador.</p>

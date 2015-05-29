@@ -139,4 +139,17 @@ eventosModule.service('cu1Service', ['$q', '$http', function($q, $http) {
     //    deferred.resolve(res);
     //    return deferred.promise;
     };
+    this.AVerEventosAdmin = function(args) {
+        if(typeof args == 'undefined') args={};
+        return $http({
+          url: 'cu1/AVerEventosAdmin',
+          method: 'GET',
+          params: args
+        });
+    //    var labels = ["/VPrincipalAdministrador", "/VPrincipalAdministrador", ];
+    //    var res = labels[0];
+    //    var deferred = $q.defer();
+    //    deferred.resolve(res);
+    //    return deferred.promise;
+    };
 }]);

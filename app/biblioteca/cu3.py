@@ -9,7 +9,7 @@ from app import db, models
 def AIdentificacion():
     #POST/PUT parameters
     params = request.get_json()
-    results = [{'label':'/VPrincipalUsuario', 'msg':[ur'Vista de Usuario'], "actor":"usuario"}, {'label':'/VPrincipalAdministrador', 'msg':[ur'Vista de Administrador'], "actor":"administrador"}, {'label':'/VPrincipal', 'msg':[ur'No Identificado']}, ]
+    results = [{'label':'/VPrincipalUsuario', 'msg':[ur'Vista de Usuario'], "actor":"usuario"}, {'label':'/VPrincipal', 'msg':[ur'No Identificado']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
@@ -58,6 +58,7 @@ def ARegistro():
         new_person = models.Person(nombres=name,apellidos=lnam,nickname=nick,contrasena=pasw,edad=ages,telefono=phon,correo=mail,admin=True)
     db.session.add(new_person)
     db.session.commit()
+
 
     #Action code ends here
     if "actor" in res:

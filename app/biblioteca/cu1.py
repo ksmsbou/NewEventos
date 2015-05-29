@@ -12,6 +12,7 @@ def ACrearEvento():
     results = [{'label':'/VPrincipalAdministrador', 'msg':[ur'Evento Creado']}, {'label':'/VCrearEvento', 'msg':[ur'Evento No Creado']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
+
     cre = session['usrid']
     nam = request.form['nombre']
     des = request.form['descripccion']
@@ -19,10 +20,9 @@ def ACrearEvento():
     fec = request.form['fecha']
     cap = request.form['capacidad']
     dis = request.form['disponibilidad']
-    print 'ola k ase'
-    afi = request.files['afiche']
-    print afi
-    new_event = models.Event(creador=cre,nombre=nam,descripccion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis,afiche=afi)
+    #afic = request.files['afiche']
+
+    new_event = models.Event(creador=cre,nombre=nam,descripccion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis)
     db.session.add(new_event)
     if db.session.commit():
         res = results[0]
@@ -116,6 +116,25 @@ def AVerEvento():
 
 
 
+@cu1.route('/cu1/AVerEventosAdmin')
+def AVerEventosAdmin():
+    #POST/PUT parameters
+    params = request.get_json()
+    results = [{'label':'/VPrincipalAdministrador', 'msg':[ur'Eventos Listados']}, {'label':'/VPrincipalAdministrador', 'msg':[ur'Eventos No Listados']}, ]
+    res = results[0]
+    #Action code goes here, res should be a list with a label and a message
+
+
+    #Action code ends here
+    if "actor" in res:
+        if res['actor'] is None:
+            session.pop("actor", None)
+        else:
+            session['actor'] = res['actor']
+    return json.dumps(res)
+
+
+
 @cu1.route('/cu1/VCrearEvento')
 def VCrearEvento():
     res = {}
@@ -131,6 +150,8 @@ def VCrearEvento():
 
 @cu1.route('/cu1/VModificarEvento')
 def VModificarEvento():
+    #GET parameter
+    id = request.args['id']
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
