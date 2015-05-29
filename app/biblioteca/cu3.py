@@ -9,7 +9,7 @@ from app import db, models
 def AIdentificacion():
     #POST/PUT parameters
     params = request.get_json()
-    results = [{'label':'/VPrincipalUsuario', 'msg':[ur'Vista de Usuario'], "actor":"usuario"}, {'label':'/VPrincipal', 'msg':[ur'No Identificado']}, ]
+    results = [{'label':'/VPrincipalUsuario', 'msg':[ur'Vista de Usuario'], "actor":"usuario"}, {'label':'/VPrincipalAdministrador', 'msg':[ur'Vista de Administrador'], "actor":"administrador"}, {'label':'/VPrincipal', 'msg':[ur'No Identificado']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
@@ -20,7 +20,7 @@ def AIdentificacion():
     if registered_user is None:
         res = results[2]
     else:
-        session['usrid'] = registered_user.id
+        session['usrid'] = registered_user.idPerson
         if registered_user.admin:
             res = results[1]
         else:

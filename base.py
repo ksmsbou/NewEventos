@@ -64,7 +64,7 @@ class Person(db.Model):
       
 class Reservacion(db.Model):
     idReservacion = db.Column(db.Integer, primary_key=True)
-    idEvento      = db.Column(db.Integer, db.ForeignKey('event.idEvent'  ))
+    idEvento      = db.Column(db.Integer, db.ForeignKey('event.idEvent'))
     idPersona     = db.Column(db.Integer, db.ForeignKey('person.idPerson'))
     #events       = db.relationship('Event', backref=db.backref('eventos', lazy='dynamic'))
 

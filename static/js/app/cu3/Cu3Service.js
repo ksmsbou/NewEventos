@@ -32,7 +32,7 @@ eventosModule.service('cu3Service', ['$q', '$http', function($q, $http) {
           data: fUsuario,
           method: 'POST',
         });
-    //    var labels = ["/VPrincipalUsuario", "/VPrincipal", ];
+    //    var labels = ["/VPrincipalUsuario", "/VPrincipalAdministrador", "/VPrincipal", ];
     //    var res = labels[0];
     //    var deferred = $q.defer();
     //    deferred.resolve(res);

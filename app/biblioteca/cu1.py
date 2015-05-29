@@ -170,6 +170,11 @@ def VPrincipalAdministrador():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    events = models.Event.query.all()
+    e = []
+    for event in events:
+        e.append({'idEvento':event.idEvent,'nombre':event.nombre,'fecha':event.fecha})
+    res['data1'] = e
 
     #Action code ends here
     return json.dumps(res)

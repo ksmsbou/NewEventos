@@ -2,7 +2,7 @@ from app import db
 
 class Event(db.Model):
     idEvent        = db.Column(db.Integer, primary_key=True)
-    creador        = db.Column(db.String(128))
+    creador        = db.Column(db.Integer, db.ForeignKey('person.idPerson'))
     nombre         = db.Column(db.String(128))
     descripccion   = db.Column(db.String(256))
     ubicacion      = db.Column(db.String(256))
