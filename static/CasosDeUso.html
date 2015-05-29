@@ -10,6 +10,41 @@
  <li>
   <p></p>
   <ul>
+   <li>URL: '/cu1/AVerEventosAdmin'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalAdministrador',</li>
+       <li> msg:"Eventos Listados".</li>
+      </ul>
+     </li>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalAdministrador',</li>
+       <li> msg:"Eventos No Listados".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/VPrincipalAdministrador'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
    <li>URL: '/cu1/ACrearEvento'</li>
    <li>Método: POST</li><li>Formato de entrada y salida: JSON</li>
 Parámetros GET: Formulario
@@ -67,10 +102,117 @@ Opcional.
    </li>
   </ul>
  </li> <li>
+  <p><br></p>
+  <ul>
+   <li>URL: '/cu1/VCrearEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+  </ul>
+ </li> <li>
   <p></p>
   <ul>
-   <li>URL: '/cu1/VPrincipalAdministrador'</li>
+   <li>URL: '/cu1/AVerEvento'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+<p>Precondición: creador(nickname,idevento).</p>
+<p>Postcondicion: eventoMostrado(idevento).</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VVerEvento',</li>
+       <li> msg:"Evento Visto".</li>
+      </ul>
+     </li>
+     <li>
+<p>Precondición: ¬creador(nickname,idevento).</p>
+<p>Postcondicion: true.</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalAdministrador',</li>
+       <li> msg:"Evento No Visto".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/VVerEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/AEliminarEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+<p>Precondición: creador(nickname,idevento).</p>
+<p>Postcondicion: ¬existeEvento(idevento).</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VPrincipalAdministrador',</li>
+       <li> msg:"Evento Eliminado".</li>
+      </ul>
+     </li>
+     <li>
+<p>Precondición: ¬creador(nickname,idevento).</p>
+<p>Postcondicion: true.</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VVerEvento',</li>
+       <li> msg:"Evento No Eliminado".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu1/APersonaAsistio'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: Sin restricción de rol
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VVerEvento',</li>
+       <li> msg:"Asistencia Confirmada".</li>
+      </ul>
+     </li>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VVerEvento',</li>
+       <li> msg:"Asistencia No Confirmada".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p><br></p>
+  <ul>
+   <li>URL: '/cu1/VModificarEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+Parámetros GET: id
    <li>Roles: administrador </li>
   </ul>
  </li> <li>
@@ -125,148 +267,6 @@ Opcional.
       <ul>
        <li>label:'/VModificarEvento',</li>
        <li> msg:"Evento No Modificado".</li>
-      </ul>
-     </li>
-
-    </ol>
-   </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
-   <li>URL: '/cu1/VVerEvento'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: administrador </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
-   <li>URL: '/cu1/AEliminarEvento'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: administrador </li>
-   <li>Requisitos: No disponible
-   <li>
-    <p><strong>Cursos posibles</strong></p>
-    <ol>
-     <li>
-<p>Precondición: creador(nickname,idevento).</p>
-<p>Postcondicion: ¬existeEvento(idevento).</p>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VPrincipalAdministrador',</li>
-       <li> msg:"Evento Eliminado".</li>
-      </ul>
-     </li>
-     <li>
-<p>Precondición: ¬creador(nickname,idevento).</p>
-<p>Postcondicion: true.</p>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VVerEvento',</li>
-       <li> msg:"Evento No Eliminado".</li>
-      </ul>
-     </li>
-
-    </ol>
-   </li>
-  </ul>
- </li> <li>
-  <p><br></p>
-  <ul>
-   <li>URL: '/cu1/VModificarEvento'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-Parámetros GET: id
-   <li>Roles: administrador </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
-   <li>URL: '/cu1/AVerEvento'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: administrador </li>
-   <li>Requisitos: No disponible
-   <li>
-    <p><strong>Cursos posibles</strong></p>
-    <ol>
-     <li>
-<p>Precondición: creador(nickname,idevento).</p>
-<p>Postcondicion: eventoMostrado(idevento).</p>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VVerEvento',</li>
-       <li> msg:"Evento Visto".</li>
-      </ul>
-     </li>
-     <li>
-<p>Precondición: ¬creador(nickname,idevento).</p>
-<p>Postcondicion: true.</p>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VPrincipalAdministrador',</li>
-       <li> msg:"Evento No Visto".</li>
-      </ul>
-     </li>
-
-    </ol>
-   </li>
-  </ul>
- </li> <li>
-  <p><br></p>
-  <ul>
-   <li>URL: '/cu1/VCrearEvento'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: administrador </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
-   <li>URL: '/cu1/APersonaAsistio'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: Sin restricción de rol
-   <li>Requisitos: No disponible
-   <li>
-    <p><strong>Cursos posibles</strong></p>
-    <ol>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VVerEvento',</li>
-       <li> msg:"Asistencia Confirmada".</li>
-      </ul>
-     </li>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VVerEvento',</li>
-       <li> msg:"Asistencia No Confirmada".</li>
-      </ul>
-     </li>
-
-    </ol>
-   </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
-   <li>URL: '/cu1/AVerEventosAdmin'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: administrador </li>
-   <li>Requisitos: No disponible
-   <li>
-    <p><strong>Cursos posibles</strong></p>
-    <ol>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VPrincipalAdministrador',</li>
-       <li> msg:"Eventos Listados".</li>
-      </ul>
-     </li>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VPrincipalAdministrador',</li>
-       <li> msg:"Eventos No Listados".</li>
       </ul>
      </li>
 
@@ -345,7 +345,7 @@ Parámetros GET: id
   <p></p>
   <ul>
    <li>URL: '/cu2/VEventosInscritos'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Método: GET</li>
    <li>Roles: usuario </li>
   </ul>
  </li> <li>
@@ -380,35 +380,7 @@ Parámetros GET: id
   <p></p>
   <ul>
    <li>URL: '/cu2/VEventoInscrito'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: usuario </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
-   <li>URL: '/cu2/ACertificado'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: usuario </li>
-   <li>Requisitos: No disponible
-   <li>
-    <p><strong>Cursos posibles</strong></p>
-    <ol>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VEventoInscrito',</li>
-       <li> msg:"Certificado obtenido".</li>
-      </ul>
-     </li>
-
-    </ol>
-   </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
-   <li>URL: '/cu2/VEventosNoInscritos'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Método: GET</li>
    <li>Roles: usuario </li>
   </ul>
  </li> <li>
@@ -435,8 +407,36 @@ Parámetros GET: id
  </li> <li>
   <p></p>
   <ul>
-   <li>URL: '/cu2/AVerEventoNoInscrito'</li>
+   <li>URL: '/cu2/ACertificado'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+   <li>Requisitos: No disponible
+   <li>
+    <p><strong>Cursos posibles</strong></p>
+    <ol>
+     <li>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VEventoInscrito',</li>
+       <li> msg:"Certificado obtenido".</li>
+      </ul>
+     </li>
+
+    </ol>
+   </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VEventosNoInscritos'</li>
+   <li>Método: GET</li>
+   <li>Roles: usuario </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/AVerEventoNoInscrito'</li>
+   <li>Método: GET</li>
    <li>Roles: usuario </li>
    <li>Requisitos: No disponible
    <li>
@@ -459,13 +459,6 @@ Parámetros GET: id
 
     </ol>
    </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
-   <li>URL: '/cu2/VEventoNoInscrito'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: usuario </li>
   </ul>
  </li> <li>
   <p></p>
@@ -494,6 +487,13 @@ Parámetros GET: id
 
     </ol>
    </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VEventoNoInscrito'</li>
+   <li>Método: GET</li>
+   <li>Roles: usuario </li>
   </ul>
  </li>
 </ol>
@@ -560,13 +560,6 @@ Expresión de validación: <code>/(s|n)/i</code>.
       <ul>
        <li>label:'/VRegistro',</li>
        <li> msg:"No Registrado".</li>
-      </ul>
-     </li>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VPrincipal',</li>
-       <li> msg:"Volver".</li>
       </ul>
      </li>
 

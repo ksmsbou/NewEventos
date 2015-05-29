@@ -12,17 +12,13 @@
         </div>
         <div class="collapse navbar-collapse" id="contenido-plegable">
             <ul class="nav navbar-nav navbar-left">
-<li><a ng-click="ACredencial0()"
-       ng-show="actor=='usuario' || false">
-  Obtener Credencial</a></li>
-<li><a ng-click="ACertificado1()"
-       ng-show="actor=='usuario' || false">
-  Recibir Certificado</a></li>
-
             </ul>
             <ul class="nav navbar-nav navbar-right">
 <li class="navbar-text" ng-show="usuario.nombre" ng-bind="usuario.nombre"></li>
-<li><a ng-click="ASalir2()"
+<li><a ng-click="VEventosInscritos3()"
+       ng-show="actor=='usuario' || false">
+    Regresar</a></li>
+<li><a ng-click="ASalir4()"
        ng-show="actor=='administrador' || actor=='usuario' || false">
     Salir</a></li>
 
@@ -31,6 +27,13 @@
     </div>
 </nav>
 
+            </tr>
+        </table>
+
+<hr />            </tr>
+        </table>
+
+<hr />
 
 
 <div id="right"></div>

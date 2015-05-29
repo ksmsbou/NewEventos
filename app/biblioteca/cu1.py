@@ -105,6 +105,11 @@ def AVerEvento():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
+#idEv = session['usrid']
+#e = models.Event.query.get(idEv)
+#
+#res['data2'] = [{'nombre':e.nombre,'descripccion':e.descripccion,'ubicacion':e.ubicacion,'fecha':e.fecha,
+#                 'capacidad':e.capacidad, 'disponibilidad':e.disponibilidad}]
 
     #Action code ends here
     if "actor" in res:
@@ -188,11 +193,6 @@ def VVerEvento():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
-    idEv = session['usrid']
-    e = models.Event.query.get(idEv)
-
-    res['data2'] = [{'nombre':e.nombre,'descripccion':e.descripccion,'ubicacion':e.ubicacion,'fecha':e.fecha,
-                    'capacidad':e.capacidad, 'disponibilidad':e.disponibilidad}]
 
     #Action code ends here
     return json.dumps(res)

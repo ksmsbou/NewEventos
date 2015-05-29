@@ -2,15 +2,15 @@ eventosModule.config(function ($routeProvider) {
     $routeProvider.when('/VPrincipalAdministrador', {
                 controller: 'VPrincipalAdministradorController',
                 templateUrl: 'app/cu1/VPrincipalAdministrador.html'
+            }).when('/VCrearEvento', {
+                controller: 'VCrearEventoController',
+                templateUrl: 'app/cu1/VCrearEvento.html'
             }).when('/VVerEvento', {
                 controller: 'VVerEventoController',
                 templateUrl: 'app/cu1/VVerEvento.html'
             }).when('/VModificarEvento/:id', {
                 controller: 'VModificarEventoController',
                 templateUrl: 'app/cu1/VModificarEvento.html'
-            }).when('/VCrearEvento', {
-                controller: 'VCrearEventoController',
-                templateUrl: 'app/cu1/VCrearEvento.html'
             });
 });
 
@@ -67,6 +67,53 @@ eventosModule.controller('VPrincipalAdministradorController',
       };
 
     }]);
+eventosModule.controller('VCrearEventoController', 
+   ['$scope', '$location', '$route', 'flash', 'ngDialog', 'cu1Service', 'cu3Service',
+    function ($scope, $location, $route, flash, ngDialog, cu1Service, cu3Service) {
+      $scope.msg = '';
+      $scope.fEvento = {};
+
+      cu1Service.VCrearEvento().then(function (object) {
+        $scope.res = object.data;
+        for (var key in object.data) {
+            $scope[key] = object.data[key];
+        }
+        if ($scope.logout) {
+            $location.path('/');
+        }
+      });
+      $scope.VPrincipalAdministrador1 = function() {
+        $location.path('/VPrincipalAdministrador');
+      };
+      $scope.ASalir2 = function() {
+          
+        cu3Service.ASalir().then(function (object) {
+          var msg = object.data["msg"];
+          if (msg) flash(msg);
+          var label = object.data["label"];
+          $location.path(label);
+          $route.reload();
+        });};
+
+      $scope.fEventoSubmitted = false;
+      $scope.ACrearEvento0 = function(isValid) {
+        $scope.fEventoSubmitted = true;
+        if (isValid) {
+          
+          cu1Service.ACrearEvento($scope.fEvento).then(function (object) {
+              var msg = object.data["msg"];
+              if (msg) flash(msg);
+              var label = object.data["label"];
+              $location.path(label);
+              $route.reload();
+          });
+        }
+      };
+
+$scope.__ayuda = function() {
+ngDialog.open({ template: 'ayuda_VCrearEvento.html',
+        showClose: true, closeByDocument: true, closeByEscape: true});
+}    }]);
 eventosModule.controller('VVerEventoController', 
    ['$scope', '$location', '$route', 'flash', 'ngTableParams', 'cu1Service', 'cu3Service',
     function ($scope, $location, $route, flash, ngTableParams, cu1Service, cu3Service) {
@@ -105,7 +152,10 @@ eventosModule.controller('VVerEventoController',
           $location.path(label);
           $route.reload();
         });};
-      $scope.ASalir3 = function() {
+      $scope.VPrincipalAdministrador3 = function() {
+        $location.path('/VPrincipalAdministrador');
+      };
+      $scope.ASalir4 = function() {
           
         cu3Service.ASalir().then(function (object) {
           var msg = object.data["msg"];
@@ -116,7 +166,7 @@ eventosModule.controller('VVerEventoController',
         });};
 
       $scope.APersonaAsistio2 = function(id) {
-          var tableFields = [["idPersona","idPersona"]];
+          var tableFields = [["idPersona","Persona"], ["nombres","Nombre"], ["apellidos","Apellidos"]];
           var arg = {};
           arg[tableFields[0][1]] = ((typeof id === 'object')?JSON.stringify(id):id);
           cu1Service.APersonaAsistio(arg).then(function (object) {
@@ -144,7 +194,10 @@ eventosModule.controller('VModificarEventoController',
             $location.path('/');
         }
       });
-      $scope.ASalir1 = function() {
+      $scope.VVerEvento1 = function() {
+        $location.path('/VVerEvento');
+      };
+      $scope.ASalir2 = function() {
           
         cu3Service.ASalir().then(function (object) {
           var msg = object.data["msg"];
@@ -171,49 +224,5 @@ eventosModule.controller('VModificarEventoController',
 
 $scope.__ayuda = function() {
 ngDialog.open({ template: 'ayuda_VModificarEvento.html',
-        showClose: true, closeByDocument: true, closeByEscape: true});
-}    }]);
-eventosModule.controller('VCrearEventoController', 
-   ['$scope', '$location', '$route', 'flash', 'ngDialog', 'cu1Service', 'cu3Service',
-    function ($scope, $location, $route, flash, ngDialog, cu1Service, cu3Service) {
-      $scope.msg = '';
-      $scope.fEvento = {};
-
-      cu1Service.VCrearEvento().then(function (object) {
-        $scope.res = object.data;
-        for (var key in object.data) {
-            $scope[key] = object.data[key];
-        }
-        if ($scope.logout) {
-            $location.path('/');
-        }
-      });
-      $scope.ASalir1 = function() {
-          
-        cu3Service.ASalir().then(function (object) {
-          var msg = object.data["msg"];
-          if (msg) flash(msg);
-          var label = object.data["label"];
-          $location.path(label);
-          $route.reload();
-        });};
-
-      $scope.fEventoSubmitted = false;
-      $scope.ACrearEvento0 = function(isValid) {
-        $scope.fEventoSubmitted = true;
-        if (isValid) {
-          
-          cu1Service.ACrearEvento($scope.fEvento).then(function (object) {
-              var msg = object.data["msg"];
-              if (msg) flash(msg);
-              var label = object.data["label"];
-              $location.path(label);
-              $route.reload();
-          });
-        }
-      };
-
-$scope.__ayuda = function() {
-ngDialog.open({ template: 'ayuda_VCrearEvento.html',
         showClose: true, closeByDocument: true, closeByEscape: true});
 }    }]);

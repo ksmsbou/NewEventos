@@ -6,7 +6,7 @@ eventosModule.service('cu3Service', ['$q', '$http', function($q, $http) {
           data: fRegistro,
           method: 'POST',
         });
-    //    var labels = ["/VPrincipal", "/VRegistro", "/VPrincipal", ];
+    //    var labels = ["/VPrincipal", "/VRegistro", ];
     //    var res = labels[0];
     //    var deferred = $q.defer();
     //    deferred.resolve(res);

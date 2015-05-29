@@ -12,14 +12,13 @@
         </div>
         <div class="collapse navbar-collapse" id="contenido-plegable">
             <ul class="nav navbar-nav navbar-left">
-<li><a ng-click="AVerEventoNoInscrito0()"
-       ng-show="actor=='usuario' || false">
-  Ver No Inscrito</a></li>
-
             </ul>
             <ul class="nav navbar-nav navbar-right">
 <li class="navbar-text" ng-show="usuario.nombre" ng-bind="usuario.nombre"></li>
-<li><a ng-click="ASalir1()"
+<li><a ng-click="VPrincipalUsuario1()"
+       ng-show="actor=='usuario' || false">
+    Regresar</a></li>
+<li><a ng-click="ASalir2()"
        ng-show="actor=='administrador' || actor=='usuario' || false">
     Salir</a></li>
 
@@ -28,6 +27,16 @@
     </div>
 </nav>
 
+        <table ng-table="tableParams0" template-pagination="pager.html" class="table">
+            <tr ng-repeat="row in $data">
+                <td data-title="'Evento'">{{row['idEvento']}}</td>
+                <td data-title="'Nombre'">{{row['nombre']}}</td>
+                <td data-title="'Fecha'">{{row['fecha']}}</td>
+                <td data-title=""><a class="navbar-nav" ng-click="AVerEventoNoInscrito0(row[''])">Ver No Inscrito</a></td>
+            </tr>
+        </table>
+
+<hr />
 
 
 <div id="right"></div>

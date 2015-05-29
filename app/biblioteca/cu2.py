@@ -81,7 +81,7 @@ def AVerEventoInscrito():
 
 
 
-@cu2.route('/cu2/AVerEventoNoInscrito')
+@cu2.route('/cu2/AVerEventoNoInscrito', methods=['GET'])
 def AVerEventoNoInscrito():
     #POST/PUT parameters
     params = request.get_json()
@@ -138,7 +138,7 @@ def AVerEventosNoInscritos():
 
 
 
-@cu2.route('/cu2/VEventoInscrito')
+@cu2.route('/cu2/VEventoInscrito', methods=['GET'])
 def VEventoInscrito():
     res = {}
     if "actor" in session:
@@ -151,7 +151,7 @@ def VEventoInscrito():
 
 
 
-@cu2.route('/cu2/VEventoNoInscrito')
+@cu2.route('/cu2/VEventoNoInscrito', methods=['GET'])
 def VEventoNoInscrito():
     res = {}
     if "actor" in session:
@@ -164,31 +164,44 @@ def VEventoNoInscrito():
 
 
 
-@cu2.route('/cu2/VEventosInscritos')
+@cu2.route('/cu2/VEventosInscritos', methods=['GET'])
 def VEventosInscritos():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    e = []
+    reservaciones = models.Reservacion.query.filter(models.Reservacion.idPersona == session['usrid'])
+    for reservacion in reservaciones:
+        event = models.Event.query.filter(models.Event.idEvent == reservacion.idEvent)
+        e.append({'idEvento':event.idEvent,'nombre':event.nombre,'fecha':event.fecha})
+    res['data0'] = e
 
     #Action code ends here
     return json.dumps(res)
 
 
 
-@cu2.route('/cu2/VEventosNoInscritos')
+@cu2.route('/cu2/VEventosNoInscritos', methods=['GET'])
 def VEventosNoInscritos():
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
-    #events = models.Event.query.filter(models.Event.creador != session['usrid'])
-    #e = []
-    #for event in events:
-    #    e.append({'idEvento':event.idEvent,'nombre':event.nombre,'fecha':event.fecha})
-    #res['data?'] = e
 
+    e = []
+    reservaciones = models.Reservacion.query.filter(models.Reservacion.idPersona == session['usrid'])
+    for evento in models.Event.query.all():
+        event_is_here = False
+        for reservacion in reservaciones:
+            if evento.idEvent == reservacion.idEvent:
+                event_is_here = True
+                break
+        if not event_is_here:
+            e.append({'idEvento':evento.idEvent,'nombre':evento.nombre,'fecha':evento.fecha})
+
+    res['data0'] = e
 
     #Action code ends here
     return json.dumps(res)

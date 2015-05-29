@@ -40,7 +40,7 @@ def AIdentificacion():
 def ARegistro():
     #POST/PUT parameters
     params = request.get_json()
-    results = [{'label':'/VPrincipal', 'msg':[ur'Registrado']}, {'label':'/VRegistro', 'msg':[ur'No Registrado']}, {'label':'/VPrincipal', 'msg':[ur'Volver']}, ]
+    results = [{'label':'/VPrincipal', 'msg':[ur'Registrado']}, {'label':'/VRegistro', 'msg':[ur'No Registrado']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
