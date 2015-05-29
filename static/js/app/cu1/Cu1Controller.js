@@ -54,7 +54,7 @@ eventosModule.controller('VPrincipalAdministradorController',
         });};
 
       $scope.AVerEvento1 = function(id) {
-          var tableFields = [["idEvento","idEvento"], ["nombre",""]];
+          var tableFields = [["idEvento","Evento"], ["nombre","Nombre"], ["fecha","Fecha"]];
           var arg = {};
           arg[tableFields[0][1]] = ((typeof id === 'object')?JSON.stringify(id):id);
           cu1Service.AVerEvento(arg).then(function (object) {
