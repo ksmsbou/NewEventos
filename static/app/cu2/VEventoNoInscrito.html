@@ -12,6 +12,10 @@
         </div>
         <div class="collapse navbar-collapse" id="contenido-plegable">
             <ul class="nav navbar-nav navbar-left">
+<li><a ng-click="AReservarEvento0()"
+       ng-show="actor=='usuario' || false">
+  Reservar</a></li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
 <li class="navbar-text" ng-show="usuario.nombre" ng-bind="usuario.nombre"></li>
@@ -27,12 +31,14 @@
     </div>
 </nav>
 
-
-<a>Datos del Evento</a>
-            </tr>
+        <h1 align="center">Datos del Evento</h1><br>
+        <table template-pagination="pager.html" class="table table table-striped" align="center">
+            <tr><td><b>{{"Nombre:           " + res['data102']['nombre']}}</b></td></tr>
+            <tr><td><b>{{"Descripccion:     " + res['data102']['descripccion']}}</b></td></tr>
+            <tr><td><b>{{"Ubicacion:        " + res['data102']['ubicacion']}}</b></td></tr>
+            <tr><td><b>{{"Fecha:            " + res['data102']['fecha']}}</b></td></tr>
+            <tr><td><b>{{"Disponibilidad:   " + res['data102']['disponibilidad'] + "/" + res['data102']['capacidad']}}</b></td></tr>
         </table>
-
-<hr />
 
 
 <div id="right"></div>

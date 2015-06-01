@@ -79,6 +79,7 @@ def ASalir():
     #Action code goes here, res should be a list with a label and a message
 
     del session['usrid']
+    del session['idevento']
 
     #Action code ends here
     if "actor" in res:

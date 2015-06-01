@@ -66,6 +66,7 @@ def AModificarEvento():
     results = [{'label':'/VVerEvento', 'msg':[ur'Evento Modificado']}, {'label':'/VModificarEvento', 'msg':[ur'Evento No Modificado']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
+
     session['idevento'] = request.args['id']
 
     #Action code ends here
@@ -106,6 +107,7 @@ def AVerEvento():
     #Action code goes here, res should be a list with a label and a message
 
     session['idevento'] = request.args['id']
+
     #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
@@ -128,6 +130,7 @@ def VCrearEvento():
     return json.dumps(res)
 
 
+
 @cu1.route('/cu1/VModificarEvento')
 def VModificarEvento():
     res = {}
@@ -138,9 +141,9 @@ def VModificarEvento():
     event = models.Event.query.get(int(session['idevento']))
     print(event.nombre)
 
-
     #Action code ends here
     return json.dumps(res)
+
 
 
 @cu1.route('/cu1/VPrincipalAdministrador')
@@ -150,15 +153,16 @@ def VPrincipalAdministrador():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    session['idevento'] = 0
     events = models.Event.query.filter(models.Event.creador == session['usrid'])
     e = []
     for event in events:
         e.append({'idEvento':event.idEvent,'nombre':event.nombre,'fecha':event.fecha})
     res['data1'] = e
 
-
     #Action code ends here
     return json.dumps(res)
+
 
 
 @cu1.route('/cu1/VVerEvento')
@@ -169,10 +173,8 @@ def VVerEvento():
     #Action code goes here, res should be a JSON structure
 
     event = models.Event.query.get(int(session['idevento']))
-    e = []
-
-    e.append({'nombre':event.nombre,'descripccion':event.descripccion,'ubicacion':event.ubicacion,'fecha':event.fecha,
-             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad})
+    e = {'nombre':event.nombre,'descripccion':event.descripccion,'ubicacion':event.ubicacion,'fecha':event.fecha,
+             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
     res['data100'] = e
 
     #Action code ends here

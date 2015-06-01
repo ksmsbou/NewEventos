@@ -113,7 +113,7 @@ eventosModule.controller('VEventoInscritoController',
             $location.path('/');
         }
       });
-      $scope.ACredencial1 = function() {
+      $scope.ACredencial0 = function() {
           
         cu2Service.ACredencial().then(function (object) {
           var msg = object.data["msg"];
@@ -122,7 +122,7 @@ eventosModule.controller('VEventoInscritoController',
           $location.path(label);
           $route.reload();
         });};
-      $scope.ACertificado2 = function() {
+      $scope.ACertificado1 = function() {
           
         cu2Service.ACertificado().then(function (object) {
           var msg = object.data["msg"];
@@ -211,7 +211,7 @@ eventosModule.controller('VEventoNoInscritoController',
             $location.path('/');
         }
       });
-      $scope.AReservarEvento1 = function() {
+      $scope.AReservarEvento0 = function() {
           
         cu2Service.AReservarEvento().then(function (object) {
           var msg = object.data["msg"];

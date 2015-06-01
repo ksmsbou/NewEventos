@@ -52,6 +52,10 @@ def AReservarEvento():
     #Action code goes here, res should be a list with a label and a message
 
 
+    new_reservacion = models.Reservacion(idEvento=session['idevento'],idPersona=session['usrid'])
+    db.session.add(new_reservacion)
+    db.session.commit()
+
     #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
@@ -70,6 +74,7 @@ def AVerEventoInscrito():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
+    session['idevento'] = request.args['id']
 
     #Action code ends here
     if "actor" in res:
@@ -89,6 +94,7 @@ def AVerEventoNoInscrito():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
+    session['idevento'] = request.args['id']
 
     #Action code ends here
     if "actor" in res:
@@ -107,6 +113,11 @@ def VEventoInscrito():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    # TODO Comprobar que el usuario actual puede acceder al evento actual en la instancia actual.
+    event = models.Event.query.get(int(session['idevento']))
+    e = {'nombre':event.nombre,'descripccion':event.descripccion,'ubicacion':event.ubicacion,'fecha':event.fecha,
+             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
+    res['data101'] = e
 
     #Action code ends here
     return json.dumps(res)
@@ -120,6 +131,11 @@ def VEventoNoInscrito():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    # TODO Comprobar que el usuario actual puede acceder al evento actual en la instancia actual.
+    event = models.Event.query.get(int(session['idevento']))
+    e = {'nombre':event.nombre,'descripccion':event.descripccion,'ubicacion':event.ubicacion,'fecha':event.fecha,
+             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
+    res['data102'] = e
 
     #Action code ends here
     return json.dumps(res)
@@ -133,10 +149,11 @@ def VEventosInscritos():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    session['idevento'] = 0
     e = []
     reservaciones = models.Reservacion.query.filter(models.Reservacion.idPersona == session['usrid'])
     for reservacion in reservaciones:
-        event = models.Event.query.filter(models.Event.idEvent == reservacion.idEvent)
+        event = models.Event.query.filter(models.Event.idEvent == reservacion.idEvento).first()
         e.append({'idEvento':event.idEvent,'nombre':event.nombre,'fecha':event.fecha})
     res['data0'] = e
 
@@ -152,17 +169,17 @@ def VEventosNoInscritos():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    session['idevento'] = 0
     e = []
     reservaciones = models.Reservacion.query.filter(models.Reservacion.idPersona == session['usrid'])
     for evento in models.Event.query.all():
         event_is_here = False
         for reservacion in reservaciones:
-            if evento.idEvent == reservacion.idEvent:
+            if evento.idEvent == reservacion.idEvento:
                 event_is_here = True
                 break
         if not event_is_here:
             e.append({'idEvento':evento.idEvent,'nombre':evento.nombre,'fecha':evento.fecha})
-
     res['data0'] = e
 
     #Action code ends here
@@ -177,6 +194,7 @@ def VPrincipalUsuario():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    session['idevento'] = 0
 
     #Action code ends here
     return json.dumps(res)
