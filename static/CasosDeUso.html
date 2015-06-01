@@ -10,34 +10,6 @@
  <li>
   <p></p>
   <ul>
-   <li>URL: '/cu1/AVerEventosAdmin'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: administrador </li>
-   <li>Requisitos: No disponible
-   <li>
-    <p><strong>Cursos posibles</strong></p>
-    <ol>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VPrincipalAdministrador',</li>
-       <li> msg:"Eventos Listados".</li>
-      </ul>
-     </li>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VPrincipalAdministrador',</li>
-       <li> msg:"Eventos No Listados".</li>
-      </ul>
-     </li>
-
-    </ol>
-   </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
    <li>URL: '/cu1/VPrincipalAdministrador'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: administrador </li>
@@ -143,13 +115,6 @@ Opcional.
  </li> <li>
   <p></p>
   <ul>
-   <li>URL: '/cu1/VVerEvento'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: administrador </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
    <li>URL: '/cu1/AEliminarEvento'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: administrador </li>
@@ -182,9 +147,16 @@ Opcional.
  </li> <li>
   <p></p>
   <ul>
+   <li>URL: '/cu1/VVerEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
    <li>URL: '/cu1/APersonaAsistio'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: Sin restricción de rol
+   <li>Roles: administrador </li>
    <li>Requisitos: No disponible
    <li>
     <p><strong>Cursos posibles</strong></p>
@@ -206,14 +178,6 @@ Opcional.
 
     </ol>
    </li>
-  </ul>
- </li> <li>
-  <p><br></p>
-  <ul>
-   <li>URL: '/cu1/VModificarEvento'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-Parámetros GET: id
-   <li>Roles: administrador </li>
   </ul>
  </li> <li>
   <p></p>
@@ -273,40 +237,19 @@ Opcional.
     </ol>
    </li>
   </ul>
+ </li> <li>
+  <p><br></p>
+  <ul>
+   <li>URL: '/cu1/VModificarEvento'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador </li>
+  </ul>
  </li>
 </ol>
 <h2>Caso_Usuario</h2>
 <p></p>
 <ol>
  <li>
-  <p></p>
-  <ul>
-   <li>URL: '/cu2/AVerEventosInscritos'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: usuario </li>
-   <li>Requisitos: No disponible
-   <li>
-    <p><strong>Cursos posibles</strong></p>
-    <ol>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VEventosInscritos',</li>
-       <li> msg:"Vistos Inscritos".</li>
-      </ul>
-     </li>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VPrincipalUsuario',</li>
-       <li> msg:"No Vistos Inscritos".</li>
-      </ul>
-     </li>
-
-    </ol>
-   </li>
-  </ul>
- </li> <li>
   <p></p>
   <ul>
    <li>URL: '/cu2/VPrincipalUsuario'</li>
@@ -316,36 +259,8 @@ Opcional.
  </li> <li>
   <p></p>
   <ul>
-   <li>URL: '/cu2/AVerEventosNoInscritos'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: usuario </li>
-   <li>Requisitos: No disponible
-   <li>
-    <p><strong>Cursos posibles</strong></p>
-    <ol>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VEventosNoInscritos',</li>
-       <li> msg:"Vistos No Inscritos".</li>
-      </ul>
-     </li>
-     <li>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VPrincipalUsuario',</li>
-       <li> msg:"No Vistos No Inscritos".</li>
-      </ul>
-     </li>
-
-    </ol>
-   </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
    <li>URL: '/cu2/VEventosInscritos'</li>
-   <li>Método: GET</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: usuario </li>
   </ul>
  </li> <li>
@@ -380,7 +295,7 @@ Opcional.
   <p></p>
   <ul>
    <li>URL: '/cu2/VEventoInscrito'</li>
-   <li>Método: GET</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: usuario </li>
   </ul>
  </li> <li>
@@ -428,15 +343,8 @@ Opcional.
  </li> <li>
   <p></p>
   <ul>
-   <li>URL: '/cu2/VEventosNoInscritos'</li>
-   <li>Método: GET</li>
-   <li>Roles: usuario </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
    <li>URL: '/cu2/AVerEventoNoInscrito'</li>
-   <li>Método: GET</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: usuario </li>
    <li>Requisitos: No disponible
    <li>
@@ -459,6 +367,13 @@ Opcional.
 
     </ol>
    </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VEventosNoInscritos'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
   </ul>
  </li> <li>
   <p></p>
@@ -492,7 +407,7 @@ Opcional.
   <p></p>
   <ul>
    <li>URL: '/cu2/VEventoNoInscrito'</li>
-   <li>Método: GET</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: usuario </li>
   </ul>
  </li>
@@ -503,64 +418,20 @@ Opcional.
  <li>
   <p></p>
   <ul>
-   <li>URL: '/cu3/ARegistro'</li>
-   <li>Método: POST</li><li>Formato de entrada y salida: JSON</li>
-<li>Parámetros POST:
-    <ul>     <li>nombres -  
-Opcional. 
-Long. mínima: <code>2</code>. 
-Long. máxima: <code>128</code>. 
-     </li>     <li>apellidos -  
-Opcional. 
-Long. mínima: <code>2</code>. 
-Long. máxima: <code>128</code>. 
-     </li>     <li>nickname -  
-Requerido. 
-Long. mínima: <code>2</code>. 
-Long. máxima: <code>128</code>. 
-     </li>     <li>contrasena -  
-Requerido. 
-Long. mínima: <code>2</code>. 
-Long. máxima: <code>16</code>. 
-     </li>     <li>edad -  
-Opcional. 
-Long. mínima: <code>1</code>. 
-Long. máxima: <code>3</code>. 
-     </li>     <li>telefono -  
-Requerido. 
-     </li>     <li>correo -  
-Requerido. 
-Expresión de validación: <code>/[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/</code>. 
-     </li>     <li>administrador - <br> 
-Requerido. 
-Long. mínima: <code>1</code>. 
-Long. máxima: <code>1</code>. 
-Expresión de validación: <code>/(s|n)/i</code>. 
-     </li>
-    </ul>
-   </li>
-   <li>Roles: Sin restricción de rol
+   <li>URL: '/cu3/ASalir'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: administrador usuario </li>
    <li>Requisitos: No disponible
    <li>
     <p><strong>Cursos posibles</strong></p>
     <ol>
      <li>
-<p>Precondición: nuevoUsuarioValido(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
-<p>Postcondicion: existeUsuario(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VPrincipal',</li>
-       <li> msg:"Registrado".</li>
+       <li> msg:"Sesion Cerrada".</li>
       </ul>
-     </li>
-     <li>
-<p>Precondición: ¬nuevoUsuarioValido(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
-<p>Postcondicion: true.</p>
-      <p>resultado:</p>
-      <ul>
-       <li>label:'/VRegistro',</li>
-       <li> msg:"No Registrado".</li>
-      </ul>
+<p>Se continúa sin rol específico.</p>
      </li>
 
     </ol>
@@ -634,20 +505,64 @@ Requerido.
  </li> <li>
   <p></p>
   <ul>
-   <li>URL: '/cu3/ASalir'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: administrador usuario </li>
+   <li>URL: '/cu3/ARegistro'</li>
+   <li>Método: POST</li><li>Formato de entrada y salida: JSON</li>
+<li>Parámetros POST:
+    <ul>     <li>nombres -  
+Opcional. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>128</code>. 
+     </li>     <li>apellidos -  
+Opcional. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>128</code>. 
+     </li>     <li>nickname -  
+Requerido. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>128</code>. 
+     </li>     <li>contrasena -  
+Requerido. 
+Long. mínima: <code>2</code>. 
+Long. máxima: <code>16</code>. 
+     </li>     <li>edad -  
+Opcional. 
+Long. mínima: <code>1</code>. 
+Long. máxima: <code>3</code>. 
+     </li>     <li>telefono -  
+Requerido. 
+     </li>     <li>correo -  
+Requerido. 
+Expresión de validación: <code>/[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/</code>. 
+     </li>     <li>administrador - <br> 
+Requerido. 
+Long. mínima: <code>1</code>. 
+Long. máxima: <code>1</code>. 
+Expresión de validación: <code>/(s|n)/i</code>. 
+     </li>
+    </ul>
+   </li>
+   <li>Roles: Sin restricción de rol
    <li>Requisitos: No disponible
    <li>
     <p><strong>Cursos posibles</strong></p>
     <ol>
      <li>
+<p>Precondición: nuevoUsuarioValido(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
+<p>Postcondicion: existeUsuario(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VPrincipal',</li>
-       <li> msg:"Sesion Cerrada".</li>
+       <li> msg:"Registrado".</li>
       </ul>
-<p>Se continúa sin rol específico.</p>
+     </li>
+     <li>
+<p>Precondición: ¬nuevoUsuarioValido(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
+<p>Postcondicion: true.</p>
+      <p>resultado:</p>
+      <ul>
+       <li>label:'/VRegistro',</li>
+       <li> msg:"No Registrado".</li>
+      </ul>
      </li>
 
     </ol>

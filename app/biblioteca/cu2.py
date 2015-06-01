@@ -81,7 +81,7 @@ def AVerEventoInscrito():
 
 
 
-@cu2.route('/cu2/AVerEventoNoInscrito', methods=['GET'])
+@cu2.route('/cu2/AVerEventoNoInscrito')
 def AVerEventoNoInscrito():
     #POST/PUT parameters
     params = request.get_json()
@@ -100,45 +100,7 @@ def AVerEventoNoInscrito():
 
 
 
-@cu2.route('/cu2/AVerEventosInscritos')
-def AVerEventosInscritos():
-    #POST/PUT parameters
-    params = request.get_json()
-    results = [{'label':'/VEventosInscritos', 'msg':[ur'Vistos Inscritos']}, {'label':'/VPrincipalUsuario', 'msg':[ur'No Vistos Inscritos']}, ]
-    res = results[0]
-    #Action code goes here, res should be a list with a label and a message
-
-
-    #Action code ends here
-    if "actor" in res:
-        if res['actor'] is None:
-            session.pop("actor", None)
-        else:
-            session['actor'] = res['actor']
-    return json.dumps(res)
-
-
-
-@cu2.route('/cu2/AVerEventosNoInscritos')
-def AVerEventosNoInscritos():
-    #POST/PUT parameters
-    params = request.get_json()
-    results = [{'label':'/VEventosNoInscritos', 'msg':[ur'Vistos No Inscritos']}, {'label':'/VPrincipalUsuario', 'msg':[ur'No Vistos No Inscritos']}, ]
-    res = results[0]
-    #Action code goes here, res should be a list with a label and a message
-
-
-    #Action code ends here
-    if "actor" in res:
-        if res['actor'] is None:
-            session.pop("actor", None)
-        else:
-            session['actor'] = res['actor']
-    return json.dumps(res)
-
-
-
-@cu2.route('/cu2/VEventoInscrito', methods=['GET'])
+@cu2.route('/cu2/VEventoInscrito')
 def VEventoInscrito():
     res = {}
     if "actor" in session:
@@ -151,7 +113,7 @@ def VEventoInscrito():
 
 
 
-@cu2.route('/cu2/VEventoNoInscrito', methods=['GET'])
+@cu2.route('/cu2/VEventoNoInscrito')
 def VEventoNoInscrito():
     res = {}
     if "actor" in session:
@@ -164,7 +126,7 @@ def VEventoNoInscrito():
 
 
 
-@cu2.route('/cu2/VEventosInscritos', methods=['GET'])
+@cu2.route('/cu2/VEventosInscritos')
 def VEventosInscritos():
     res = {}
     if "actor" in session:
@@ -183,7 +145,7 @@ def VEventosInscritos():
 
 
 
-@cu2.route('/cu2/VEventosNoInscritos', methods=['GET'])
+@cu2.route('/cu2/VEventosNoInscritos')
 def VEventosNoInscritos():
     res = {}
     if "actor" in session:

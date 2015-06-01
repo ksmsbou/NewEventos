@@ -1,18 +1,18 @@
 eventosModule.service('cu3Service', ['$q', '$http', function($q, $http) {
 
-    this.ARegistro = function(fRegistro) {
-        return  $http({
-          url: "cu3/ARegistro",
-          data: fRegistro,
-          method: 'POST',
+    this.ASalir = function(args) {
+        if(typeof args == 'undefined') args={};
+        return $http({
+          url: 'cu3/ASalir',
+          method: 'GET',
+          params: args
         });
-    //    var labels = ["/VPrincipal", "/VRegistro", ];
+    //    var labels = ["/VPrincipal", ];
     //    var res = labels[0];
     //    var deferred = $q.defer();
     //    deferred.resolve(res);
     //    return deferred.promise;
     };
-
     this.VPrincipal = function(args) {
         if(typeof args == 'undefined') args={};
         return $http({
@@ -52,17 +52,17 @@ eventosModule.service('cu3Service', ['$q', '$http', function($q, $http) {
     //    return deferred.promise;
     };
 
-    this.ASalir = function(args) {
-        if(typeof args == 'undefined') args={};
-        return $http({
-          url: 'cu3/ASalir',
-          method: 'GET',
-          params: args
+    this.ARegistro = function(fRegistro) {
+        return  $http({
+          url: "cu3/ARegistro",
+          data: fRegistro,
+          method: 'POST',
         });
-    //    var labels = ["/VPrincipal", ];
+    //    var labels = ["/VPrincipal", "/VRegistro", ];
     //    var res = labels[0];
     //    var deferred = $q.defer();
     //    deferred.resolve(res);
     //    return deferred.promise;
     };
+
 }]);

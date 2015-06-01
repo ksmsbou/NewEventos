@@ -1,18 +1,5 @@
 eventosModule.service('cu1Service', ['$q', '$http', function($q, $http) {
 
-    this.AVerEventosAdmin = function(args) {
-        if(typeof args == 'undefined') args={};
-        return $http({
-          url: 'cu1/AVerEventosAdmin',
-          method: 'GET',
-          params: args
-        });
-    //    var labels = ["/VPrincipalAdministrador", "/VPrincipalAdministrador", ];
-    //    var res = labels[0];
-    //    var deferred = $q.defer();
-    //    deferred.resolve(res);
-    //    return deferred.promise;
-    };
     this.VPrincipalAdministrador = function(args) {
         if(typeof args == 'undefined') args={};
         return $http({
@@ -76,19 +63,6 @@ eventosModule.service('cu1Service', ['$q', '$http', function($q, $http) {
     //    deferred.resolve(res);
     //    return deferred.promise;
     };
-    this.VVerEvento = function(args) {
-        if(typeof args == 'undefined') args={};
-        return $http({
-          url: 'cu1/VVerEvento',
-          method: 'GET',
-          params: args
-        });
-    //    var res = {};
-    //    var deferred = $q.defer();
-    //    deferred.resolve(res);
-    //    return deferred.promise;
-    };
-
     this.AEliminarEvento = function(args) {
         if(typeof args == 'undefined') args={};
         return $http({
@@ -102,6 +76,19 @@ eventosModule.service('cu1Service', ['$q', '$http', function($q, $http) {
     //    deferred.resolve(res);
     //    return deferred.promise;
     };
+    this.VVerEvento = function(args) {
+        if(typeof args == 'undefined') args={};
+        return $http({
+          url: 'cu1/VVerEvento',
+          method: 'GET',
+          params: args
+        });
+    //    var res = {};
+    //    var deferred = $q.defer();
+    //    deferred.resolve(res);
+    //    return deferred.promise;
+    };
+
     this.APersonaAsistio = function(args) {
         if(typeof args == 'undefined') args={};
         return $http({
@@ -115,19 +102,6 @@ eventosModule.service('cu1Service', ['$q', '$http', function($q, $http) {
     //    deferred.resolve(res);
     //    return deferred.promise;
     };
-    this.VModificarEvento = function(args) {
-        if(typeof args == 'undefined') args={};
-        return $http({
-          url: 'cu1/VModificarEvento',
-          method: 'GET',
-          params: args
-        });
-    //    var res = {};
-    //    var deferred = $q.defer();
-    //    deferred.resolve(res);
-    //    return deferred.promise;
-    };
-
     this.AModificarEvento = function(fEvento) {
         return  $http({
           url: "cu1/AModificarEvento",
@@ -147,6 +121,19 @@ eventosModule.service('cu1Service', ['$q', '$http', function($q, $http) {
           }    });
     //    var labels = ["/VVerEvento", "/VModificarEvento", ];
     //    var res = labels[0];
+    //    var deferred = $q.defer();
+    //    deferred.resolve(res);
+    //    return deferred.promise;
+    };
+
+    this.VModificarEvento = function(args) {
+        if(typeof args == 'undefined') args={};
+        return $http({
+          url: 'cu1/VModificarEvento',
+          method: 'GET',
+          params: args
+        });
+    //    var res = {};
     //    var deferred = $q.defer();
     //    deferred.resolve(res);
     //    return deferred.promise;

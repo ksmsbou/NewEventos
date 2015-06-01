@@ -12,17 +12,17 @@
         </div>
         <div class="collapse navbar-collapse" id="contenido-plegable">
             <ul class="nav navbar-nav navbar-left">
-<li><a ng-click="AVerEventosNoInscritos1()"
+<li><a ng-click="VEventosInscritos0()"
+       ng-show="actor=='usuario' || false">
+  Eventos Inscritos</a></li>
+<li><a ng-click="VEventosNoInscritos1()"
        ng-show="actor=='usuario' || false">
   Eventos No Inscritos</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
 <li class="navbar-text" ng-show="usuario.nombre" ng-bind="usuario.nombre"></li>
-<li><a ng-click="AVerEventosInscritos0()"
-       ng-show="actor=='usuario' || false">
-    Eventos Inscritos</a></li>
-<li><a ng-click="ASalir2()"
+<li><a ng-click="ASalir3()"
        ng-show="actor=='administrador' || actor=='usuario' || false">
     Salir</a></li>
 
@@ -30,6 +30,9 @@
         </div>
     </div>
 </nav>
+
+
+<a>Mensaje Inicial</a>
 
 
 

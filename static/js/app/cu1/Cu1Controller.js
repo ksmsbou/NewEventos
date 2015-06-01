@@ -8,7 +8,7 @@ eventosModule.config(function ($routeProvider) {
             }).when('/VVerEvento', {
                 controller: 'VVerEventoController',
                 templateUrl: 'app/cu1/VVerEvento.html'
-            }).when('/VModificarEvento/:id', {
+            }).when('/VModificarEvento', {
                 controller: 'VModificarEventoController',
                 templateUrl: 'app/cu1/VModificarEvento.html'
             });
@@ -54,7 +54,7 @@ eventosModule.controller('VPrincipalAdministradorController',
         });};
 
       $scope.AVerEvento1 = function(id) {
-          var tableFields = [["idEvento","Evento"], ["nombre","Nombre"], ["fecha","Fecha"]];
+          var tableFields = [["idEvento","id"], ["nombre","Nombre"], ["fecha","Fecha"]];
           var arg = {};
           arg[tableFields[0][1]] = ((typeof id === 'object')?JSON.stringify(id):id);
           cu1Service.AVerEvento(arg).then(function (object) {
@@ -126,22 +126,22 @@ eventosModule.controller('VVerEventoController',
         if ($scope.logout) {
             $location.path('/');
         }
-              var APersonaAsistio2Data = $scope.res.data2;
-              if(typeof APersonaAsistio2Data === 'undefined') APersonaAsistio2Data=[];
-              $scope.tableParams2 = new ngTableParams({
+              var APersonaAsistio3Data = $scope.res.data3;
+              if(typeof APersonaAsistio3Data === 'undefined') APersonaAsistio3Data=[];
+              $scope.tableParams3 = new ngTableParams({
                   page: 1,            // show first page
                   count: 10           // count per page
               }, {
-                  total: APersonaAsistio2Data.length, // length of data
+                  total: APersonaAsistio3Data.length, // length of data
                   getData: function($defer, params) {
-                      $defer.resolve(APersonaAsistio2Data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                      $defer.resolve(APersonaAsistio3Data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                   }
               });            
 
 
       });
-      $scope.VModificarEvento0 = function(id) {
-        $location.path('/VModificarEvento/'+id);
+      $scope.VModificarEvento0 = function() {
+        $location.path('/VModificarEvento');
       };
       $scope.AEliminarEvento1 = function() {
           
@@ -152,10 +152,10 @@ eventosModule.controller('VVerEventoController',
           $location.path(label);
           $route.reload();
         });};
-      $scope.VPrincipalAdministrador3 = function() {
+      $scope.VPrincipalAdministrador4 = function() {
         $location.path('/VPrincipalAdministrador');
       };
-      $scope.ASalir4 = function() {
+      $scope.ASalir5 = function() {
           
         cu3Service.ASalir().then(function (object) {
           var msg = object.data["msg"];
@@ -165,8 +165,8 @@ eventosModule.controller('VVerEventoController',
           $route.reload();
         });};
 
-      $scope.APersonaAsistio2 = function(id) {
-          var tableFields = [["idPersona","Persona"], ["nombres","Nombre"], ["apellidos","Apellidos"]];
+      $scope.APersonaAsistio3 = function(id) {
+          var tableFields = [["idPersona","id"], ["nombres","Nombre"], ["apellidos","Apellidos"]];
           var arg = {};
           arg[tableFields[0][1]] = ((typeof id === 'object')?JSON.stringify(id):id);
           cu1Service.APersonaAsistio(arg).then(function (object) {
@@ -180,12 +180,12 @@ eventosModule.controller('VVerEventoController',
 
     }]);
 eventosModule.controller('VModificarEventoController', 
-   ['$scope', '$location', '$route', 'flash', '$routeParams', 'ngDialog', 'cu1Service', 'cu3Service',
-    function ($scope, $location, $route, flash, $routeParams, ngDialog, cu1Service, cu3Service) {
+   ['$scope', '$location', '$route', 'flash', 'ngDialog', 'cu1Service', 'cu3Service',
+    function ($scope, $location, $route, flash, ngDialog, cu1Service, cu3Service) {
       $scope.msg = '';
       $scope.fEvento = {};
 
-      cu1Service.VModificarEvento({"id":$routeParams.id}).then(function (object) {
+      cu1Service.VModificarEvento().then(function (object) {
         $scope.res = object.data;
         for (var key in object.data) {
             $scope[key] = object.data[key];

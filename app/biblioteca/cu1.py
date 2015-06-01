@@ -66,7 +66,7 @@ def AModificarEvento():
     results = [{'label':'/VVerEvento', 'msg':[ur'Evento Modificado']}, {'label':'/VModificarEvento', 'msg':[ur'Evento No Modificado']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
-
+    session['idevento'] = request.args['id']
 
     #Action code ends here
     if "actor" in res:
@@ -105,31 +105,7 @@ def AVerEvento():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
-#idEv = session['usrid']
-#e = models.Event.query.get(idEv)
-#
-#res['data2'] = [{'nombre':e.nombre,'descripccion':e.descripccion,'ubicacion':e.ubicacion,'fecha':e.fecha,
-#                 'capacidad':e.capacidad, 'disponibilidad':e.disponibilidad}]
-
-    #Action code ends here
-    if "actor" in res:
-        if res['actor'] is None:
-            session.pop("actor", None)
-        else:
-            session['actor'] = res['actor']
-    return json.dumps(res)
-
-
-
-@cu1.route('/cu1/AVerEventosAdmin')
-def AVerEventosAdmin():
-    #POST/PUT parameters
-    params = request.get_json()
-    results = [{'label':'/VPrincipalAdministrador', 'msg':[ur'Eventos Listados']}, {'label':'/VPrincipalAdministrador', 'msg':[ur'Eventos No Listados']}, ]
-    res = results[0]
-    #Action code goes here, res should be a list with a label and a message
-
-
+    session['idevento'] = request.args['id']
     #Action code ends here
     if "actor" in res:
         if res['actor'] is None:
@@ -152,20 +128,19 @@ def VCrearEvento():
     return json.dumps(res)
 
 
-
 @cu1.route('/cu1/VModificarEvento')
 def VModificarEvento():
-    #GET parameter
-    id = request.args['id']
     res = {}
     if "actor" in session:
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    event = models.Event.query.get(int(session['idevento']))
+    print(event.nombre)
+
 
     #Action code ends here
     return json.dumps(res)
-
 
 
 @cu1.route('/cu1/VPrincipalAdministrador')
@@ -181,9 +156,9 @@ def VPrincipalAdministrador():
         e.append({'idEvento':event.idEvent,'nombre':event.nombre,'fecha':event.fecha})
     res['data1'] = e
 
+
     #Action code ends here
     return json.dumps(res)
-
 
 
 @cu1.route('/cu1/VVerEvento')
@@ -193,6 +168,12 @@ def VVerEvento():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    event = models.Event.query.get(int(session['idevento']))
+    e = []
+
+    e.append({'nombre':event.nombre,'descripccion':event.descripccion,'ubicacion':event.ubicacion,'fecha':event.fecha,
+             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad})
+    res['data100'] = e
 
     #Action code ends here
     return json.dumps(res)

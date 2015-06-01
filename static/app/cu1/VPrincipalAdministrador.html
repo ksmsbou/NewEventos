@@ -30,10 +30,9 @@
 
         <table ng-table="tableParams1" template-pagination="pager.html" class="table">
             <tr ng-repeat="row in $data">
-                <td data-title="'Evento'">{{row['idEvento']}}</td>
                 <td data-title="'Nombre'">{{row['nombre']}}</td>
                 <td data-title="'Fecha'">{{row['fecha']}}</td>
-                <td data-title=""><a class="navbar-nav" ng-click="AVerEvento1(row[''])">Evento</a></td>
+                <td><a ng-show="actor=='administrador' || false" ng-click="AVerEvento1(row['idEvento'])">Ver Evento</a></td>
             </tr>
         </table>
 

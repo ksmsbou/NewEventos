@@ -30,25 +30,13 @@ eventosModule.controller('VPrincipalUsuarioController',
             $location.path('/');
         }
       });
-      $scope.AVerEventosInscritos0 = function() {
-          
-        cu2Service.AVerEventosInscritos().then(function (object) {
-          var msg = object.data["msg"];
-          if (msg) flash(msg);
-          var label = object.data["label"];
-          $location.path(label);
-          $route.reload();
-        });};
-      $scope.AVerEventosNoInscritos1 = function() {
-          
-        cu2Service.AVerEventosNoInscritos().then(function (object) {
-          var msg = object.data["msg"];
-          if (msg) flash(msg);
-          var label = object.data["label"];
-          $location.path(label);
-          $route.reload();
-        });};
-      $scope.ASalir2 = function() {
+      $scope.VEventosInscritos0 = function() {
+        $location.path('/VEventosInscritos');
+      };
+      $scope.VEventosNoInscritos1 = function() {
+        $location.path('/VEventosNoInscritos');
+      };
+      $scope.ASalir3 = function() {
           
         cu3Service.ASalir().then(function (object) {
           var msg = object.data["msg"];
@@ -99,7 +87,7 @@ eventosModule.controller('VEventosInscritosController',
         });};
 
       $scope.AVerEventoInscrito0 = function(id) {
-          var tableFields = [["idEvento","Evento"], ["nombre","Nombre"], ["fecha","Fecha"]];
+          var tableFields = [["idEvento","id"], ["nombre","Nombre"], ["fecha","Fecha"]];
           var arg = {};
           arg[tableFields[0][1]] = ((typeof id === 'object')?JSON.stringify(id):id);
           cu2Service.AVerEventoInscrito(arg).then(function (object) {
@@ -197,7 +185,7 @@ eventosModule.controller('VEventosNoInscritosController',
         });};
 
       $scope.AVerEventoNoInscrito0 = function(id) {
-          var tableFields = [["idEvento","Evento"], ["nombre","Nombre"], ["fecha","Fecha"], ["idEvento", "id"]];
+          var tableFields = [["idEvento","id"], ["nombre","Nombre"], ["fecha","Fecha"]];
           var arg = {};
           arg[tableFields[0][1]] = ((typeof id === 'object')?JSON.stringify(id):id);
           cu2Service.AVerEventoNoInscrito(arg).then(function (object) {
@@ -211,8 +199,8 @@ eventosModule.controller('VEventosNoInscritosController',
 
     }]);
 eventosModule.controller('VEventoNoInscritoController', 
-   ['$scope', '$location', '$route', 'flash', 'ngTableParams', 'cu2Service', 'cu3Service',
-    function ($scope, $location, $route, flash, ngTableParams, cu2Service, cu3Service) {
+   ['$scope', '$location', '$route', 'flash', 'cu2Service', 'cu3Service',
+    function ($scope, $location, $route, flash, cu2Service, cu3Service) {
       $scope.msg = '';
       cu2Service.VEventoNoInscrito().then(function (object) {
         $scope.res = object.data;
@@ -222,24 +210,20 @@ eventosModule.controller('VEventoNoInscritoController',
         if ($scope.logout) {
             $location.path('/');
         }
-              var AReservarEvento0Data = $scope.res.data0;
-              if(typeof AReservarEvento0Data === 'undefined') AReservarEvento0Data=[];
-              $scope.tableParams0 = new ngTableParams({
-                  page: 1,            // show first page
-                  count: 10           // count per page
-              }, {
-                  total: AReservarEvento0Data.length, // length of data
-                  getData: function($defer, params) {
-                      $defer.resolve(AReservarEvento0Data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-                  }
-              });            
-
-
       });
-      $scope.VEventosNoInscritos1 = function() {
+      $scope.AReservarEvento1 = function() {
+          
+        cu2Service.AReservarEvento().then(function (object) {
+          var msg = object.data["msg"];
+          if (msg) flash(msg);
+          var label = object.data["label"];
+          $location.path(label);
+          $route.reload();
+        });};
+      $scope.VEventosNoInscritos2 = function() {
         $location.path('/VEventosNoInscritos');
       };
-      $scope.ASalir2 = function() {
+      $scope.ASalir3 = function() {
           
         cu3Service.ASalir().then(function (object) {
           var msg = object.data["msg"];
@@ -248,18 +232,5 @@ eventosModule.controller('VEventoNoInscritoController',
           $location.path(label);
           $route.reload();
         });};
-
-      $scope.AReservarEvento0 = function(id) {
-          var tableFields = [["idEvento","ID"], ["nombre","Nombre"], ["administrador","Administrador"], ["ubicacion","Ubicación"], ["fecha","Fecha"], ["descripcion","Descripción"]];
-          var arg = {};
-          arg[tableFields[0][1]] = ((typeof id === 'object')?JSON.stringify(id):id);
-          cu2Service.AReservarEvento(arg).then(function (object) {
-              var msg = object.data["msg"];
-              if (msg) flash(msg);
-              var label = object.data["label"];
-              $location.path(label);
-              $route.reload();
-          });
-      };
 
     }]);
