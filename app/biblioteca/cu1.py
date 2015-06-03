@@ -15,14 +15,14 @@ def ACrearEvento():
 
     cre = session['usrid']
     nam = request.form['nombre']
-    des = request.form['descripccion']
+    des = request.form['descripcion']
     ubi = request.form['ubicacion']
     fec = request.form['fecha']
     cap = request.form['capacidad']
-    dis = request.form['disponibilidad']
+    dis = cap
     #afic = request.files['afiche']
 
-    new_event = models.Event(creador=cre,nombre=nam,descripccion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis)
+    new_event = models.Event(creador=cre,nombre=nam,descripcion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis)
     db.session.add(new_event)
     if db.session.commit():
         res = results[0]
@@ -138,8 +138,16 @@ def VModificarEvento():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
-    event = models.Event.query.get(int(session['idevento']))
-    print(event.nombre)
+    evento = models.Event.query.filter(models.Event.idEvent==session['idevento']).first()
+    form = {
+        'nombre' : evento.nombre,
+        'descripcion' : evento.descripcion,
+        'ubicacion' : evento.ubicacion,
+        'fecha' : evento.fecha,
+        'capacidad' : evento.capacidad,
+        'disponibilidad' : evento.disponibilidad,
+    }
+    res['fEvento'] = form
 
     #Action code ends here
     return json.dumps(res)
@@ -173,7 +181,7 @@ def VVerEvento():
     #Action code goes here, res should be a JSON structure
 
     event = models.Event.query.get(int(session['idevento']))
-    e = {'nombre':event.nombre,'descripccion':event.descripccion,'ubicacion':event.ubicacion,'fecha':event.fecha,
+    e = {'nombre':event.nombre,'descripcion':event.descripcion,'ubicacion':event.ubicacion,'fecha':event.fecha,
              'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
     res['data100'] = e
 

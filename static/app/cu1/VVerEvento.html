@@ -15,6 +15,9 @@
 <li><a ng-click="VModificarEvento0()"
        ng-show="actor=='administrador' || false">
   Modificar Evento</a></li>
+<li><a ng-click="AEliminarEvento1()"
+       ng-show="actor=='administrador' || false">
+  Eliminar Evento</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -31,18 +34,14 @@
     </div>
 </nav>
 
-            </tr>
-        </table>
-
-<hr />        <h1 align="center">Datos del Evento</h1><br>
+        <h1 align="center">Datos del Evento</h1><br>
         <table template-pagination="pager.html" class="table table table-striped" align="center">
             <tr><td><b>{{"Nombre:           " + res['data100']['nombre']}}</b></td></tr>
-            <tr><td><b>{{"Descripccion:     " + res['data100']['descripccion']}}</b></td></tr>
-            <tr><td><b>{{"Ubicacion:        " + res['data100']['ubicacion']}}</b></td></tr>
+            <tr><td><b>{{"Descripción:      " + res['data100']['descripcion']}}</b></td></tr>
+            <tr><td><b>{{"Ubicación:        " + res['data100']['ubicacion']}}</b></td></tr>
             <tr><td><b>{{"Fecha:            " + res['data100']['fecha']}}</b></td></tr>
             <tr><td><b>{{"Capacidad:        " + res['data100']['capacidad']}}</b></td></tr>
             <tr><td><b>{{"Disponibilidad:   " + res['data100']['disponibilidad']}}</b></td></tr>
-            </tr>
         </table>
 
         <br>

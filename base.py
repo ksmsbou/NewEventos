@@ -11,7 +11,7 @@ manager = Manager(app)
 manager.add_command("runserver", Server(
     use_debugger = True,
     use_reloader = True,
-    host = '127.0.0.1')
+    host = '0.0.0.0')
 )
 
 @app.before_request
@@ -36,7 +36,7 @@ class Event(db.Model):
     idEvent        = db.Column(db.Integer, primary_key=True)
     creador        = db.Column(db.Integer, db.ForeignKey('person.idPerson'))
     nombre         = db.Column(db.String(128))
-    descripccion   = db.Column(db.String(256))
+    descripcion   = db.Column(db.String(256))
     ubicacion      = db.Column(db.String(256))
     fecha          = db.Column(db.String(10))
     capacidad      = db.Column(db.Integer)
@@ -64,8 +64,9 @@ class Person(db.Model):
       
 class Reservacion(db.Model):
     idReservacion = db.Column(db.Integer, primary_key=True)
-    idEvento      = db.Column(db.Integer, db.ForeignKey('event.idEvent'))
-    idPersona     = db.Column(db.Integer, db.ForeignKey('person.idPerson'))
+    idEvent       = db.Column(db.Integer, db.ForeignKey('event.idEvent'))
+    idPerson      = db.Column(db.Integer, db.ForeignKey('person.idPerson'))
+    asistio       = db.Column(db.Boolean)
     #events       = db.relationship('Event', backref=db.backref('eventos', lazy='dynamic'))
 
     def __repr__(self):
