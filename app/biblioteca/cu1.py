@@ -48,6 +48,15 @@ def AEliminarEvento():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
+    #Busca y elimina todas las reservaciones asociadas al evento
+    reserve = models.Reservacion.query.filter(models.Reservacion.idEvent == session['idevento']).all()
+    for reser in reserve:
+        db.session.delete(reser)
+    db.session.commit()
+    #Elimina ahora el evento
+    event = models.Event.query.filter(models.Event.idEvent == session['idevento']).first()
+    db.session.delete(event)
+    db.session.commit()
 
     #Action code ends here
     if "actor" in res:
@@ -67,7 +76,24 @@ def AModificarEvento():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
-    session['idevento'] = request.args['id']
+    # TODO Agregar restricciones a la modificacion por fecha
+    nam = request.form['nombre']
+    des = request.form['descripcion']
+    ubi = request.form['ubicacion']
+    fec = request.form['fecha']
+    cap = int(request.form['capacidad'])
+    evento = models.Event.query.filter(models.Event.idEvent == session['idevento']).first()
+    ocupados = int(evento.capacidad) - int(evento.disponibilidad)
+    if cap < ocupados :
+        res = results[1]
+    else :
+        evento.nombre = nam
+        evento.descripcion = des
+        evento.ubicacion = ubi
+        evento.fecha = fec
+        evento.capacidad = cap
+        evento.disponibilidad = cap - ocupados
+        db.session.commit()
 
     #Action code ends here
     if "actor" in res:
@@ -162,7 +188,7 @@ def VPrincipalAdministrador():
     #Action code goes here, res should be a JSON structure
 
     session['idevento'] = 0
-    events = models.Event.query.filter(models.Event.creador == session['usrid'])
+    events = models.Event.query.filter(models.Event.creador == session['usrid']).order_by(models.Event.nombre)
     e = []
     for event in events:
         e.append({'idEvento':event.idEvent,'nombre':event.nombre,'fecha':event.fecha})
@@ -180,10 +206,17 @@ def VVerEvento():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    # TODO Intentar relizar consultas mas eficientes
     event = models.Event.query.get(int(session['idevento']))
     e = {'nombre':event.nombre,'descripcion':event.descripcion,'ubicacion':event.ubicacion,'fecha':event.fecha,
              'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
     res['data100'] = e
+    p = []
+    reservaciones = models.Reservacion.query.filter(models.Reservacion.idEvent == session['idevento'])
+    for reservacion in reservaciones:
+        persona = models.Person.query.filter(models.Person.idPerson == reservacion.idPerson).first()
+        p.append({'idPersona':persona.idPerson,'nombres':persona.nombres,'apellidos':persona.apellidos})
+    res['data3'] = p
 
     #Action code ends here
     return json.dumps(res)

@@ -51,7 +51,9 @@ def AReservarEvento():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
-    new_reservacion = models.Reservacion(idEvent=session['idevento'],idPerson=session['usrid'])
+    new_reservacion = models.Reservacion(idEvent=session['idevento'],idPerson=session['usrid'],asistio=False)
+    evento = models.Event.query.filter(models.Event.idEvent == session['idevento']).first()
+    evento.disponibilidad -= 1
     db.session.add(new_reservacion)
     db.session.commit()
 
@@ -148,6 +150,7 @@ def VEventosInscritos():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    # TODO Intentar relizar consultas mas eficientes
     session['idevento'] = 0
     e = []
     reservaciones = models.Reservacion.query.filter(models.Reservacion.idPerson == session['usrid'])
@@ -168,6 +171,7 @@ def VEventosNoInscritos():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    # TODO Intentar relizar consultas mas eficientes
     session['idevento'] = 0
     e = []
     reservaciones = models.Reservacion.query.filter(models.Reservacion.idPerson == session['usrid'])
