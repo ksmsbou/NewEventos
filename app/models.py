@@ -3,7 +3,7 @@ from app import db
 class Event(db.Model):
     idEvent        = db.Column(db.Integer, primary_key=True)
     creador        = db.Column(db.Integer, db.ForeignKey('person.idPerson'))
-    nombre         = db.Column(db.String(128))
+    nombre         = db.Column(db.String(128), unique=True)
     descripcion    = db.Column(db.String(256))
     ubicacion      = db.Column(db.String(256))
     fecha          = db.Column(db.String(10))
@@ -30,10 +30,9 @@ class Person(db.Model):
 
 class Reservacion(db.Model):
     idReservacion = db.Column(db.Integer, primary_key=True)
-    idEvent      = db.Column(db.Integer, db.ForeignKey('event.idEvent'  ))
+    idEvent      = db.Column(db.Integer, db.ForeignKey('event.idEvent'))
     idPerson     = db.Column(db.Integer, db.ForeignKey('person.idPerson'))
     asistio      = db.Column(db.Boolean)
-    #events       = db.relationship('Event', backref=db.backref('eventos', lazy='dynamic'))
 
     def __repr__(self):
         return '<Reservacion %r>' % (self.idReservacion)

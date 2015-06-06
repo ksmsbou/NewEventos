@@ -3,7 +3,7 @@ from flask import request, session, Blueprint, json
 
 cu1 = Blueprint('cu1', __name__)
 from app import db, models
-
+import os
 
 @cu1.route('/cu1/ACrearEvento', methods=['POST'])
 def ACrearEvento():
@@ -20,15 +20,20 @@ def ACrearEvento():
     fec = request.form['fecha']
     cap = request.form['capacidad']
     dis = cap
-    #afic = request.files['afiche']
-
-    new_event = models.Event(creador=cre,nombre=nam,descripcion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis)
-    db.session.add(new_event)
-    if db.session.commit():
-        res = results[0]
-    #else:
-    #    print db.session.commit()
-    #    res = results[1]
+    if 'afiche' in request.files:
+        afic = request.files['afiche']
+        if afic.filename[len(afic.filename)-4:] == '.pdf':
+            path = os.path.abspath(os.path.dirname(__file__))
+            new_event = models.Event(creador=cre,nombre=nam,descripcion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis)
+            db.session.add(new_event)
+            evento = models.Event.query.filter(models.Event.nombre == nam).first()
+            afic.save(path[0:len(path)-14]+'/afiches/afiche'+str(evento.idEvent)+'.pdf')
+        else:
+            res = results[1]
+    else:
+        new_event = models.Event(creador=cre,nombre=nam,descripcion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis)
+        db.session.add(new_event)
+    db.session.commit()
 
     #Action code ends here
     if "actor" in res:

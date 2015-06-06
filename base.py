@@ -4,7 +4,7 @@ from random import SystemRandom
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 import os
-from app import db 
+from app import db
 
 app = Flask(__name__, static_url_path='')
 manager = Manager(app)
@@ -27,21 +27,19 @@ def root():
 #Application code starts here
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-
 app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///'+ os.path.join(basedir,'apl.db')
 db = SQLAlchemy(app)
-
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 class Event(db.Model):
     idEvent        = db.Column(db.Integer, primary_key=True)
     creador        = db.Column(db.Integer, db.ForeignKey('person.idPerson'))
-    nombre         = db.Column(db.String(128))
+    nombre         = db.Column(db.String(128), unique=True)
     descripcion   = db.Column(db.String(256))
     ubicacion      = db.Column(db.String(256))
     fecha          = db.Column(db.String(10))
     capacidad      = db.Column(db.Integer)
     disponibilidad = db.Column(db.Integer)
-    #afiche         = db.Column(db.String(256))
 
     def __repr__(self):
         return '<Event %r>' % (self.name)
@@ -67,7 +65,6 @@ class Reservacion(db.Model):
     idEvent       = db.Column(db.Integer, db.ForeignKey('event.idEvent'))
     idPerson      = db.Column(db.Integer, db.ForeignKey('person.idPerson'))
     asistio       = db.Column(db.Boolean)
-    #events       = db.relationship('Event', backref=db.backref('eventos', lazy='dynamic'))
 
     def __repr__(self):
         return '<Reservacion %r>' % (self.idReservacion)
