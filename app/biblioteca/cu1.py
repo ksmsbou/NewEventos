@@ -58,6 +58,10 @@ def AEliminarEvento():
     for reser in reserve:
         db.session.delete(reser)
     db.session.commit()
+    #Elimina el afiche del evento si existe
+    path = os.path.abspath(os.path.dirname(__file__))
+    if os.path.exists(path[0:len(path)-14]+'/afiches/afiche'+str(session['idevento'])+'.pdf'):
+        os.remove(path[0:len(path)-14]+'/afiches/afiche'+str(session['idevento'])+'.pdf')
     #Elimina ahora el evento
     event = models.Event.query.filter(models.Event.idEvent == session['idevento']).first()
     db.session.delete(event)
