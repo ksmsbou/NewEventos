@@ -5,6 +5,9 @@ eventosModule.config(function ($routeProvider) {
             }).when('/VEventosInscritos', {
                 controller: 'VEventosInscritosController',
                 templateUrl: 'app/cu2/VEventosInscritos.html'
+            }).when('/VCredencial', {
+                controller: 'VCredencialController',
+                templateUrl: 'app/cu2/VCredencial.html'
             }).when('/VEventoInscrito', {
                 controller: 'VEventoInscritoController',
                 templateUrl: 'app/cu2/VEventoInscrito.html'
@@ -14,6 +17,9 @@ eventosModule.config(function ($routeProvider) {
             }).when('/VEventoNoInscrito', {
                 controller: 'VEventoNoInscritoController',
                 templateUrl: 'app/cu2/VEventoNoInscrito.html'
+            }).when('/VCertificado', {
+                controller: 'VCertificadoController',
+                templateUrl: 'app/cu2/VCertificado.html'
             });
 });
 
@@ -97,6 +103,24 @@ eventosModule.controller('VEventosInscritosController',
               $location.path(label);
               $route.reload();
           });
+      };
+
+    }]);
+eventosModule.controller('VCredencialController', 
+   ['$scope', '$location', '$route', 'flash', 'cu2Service', 'cu3Service',
+    function ($scope, $location, $route, flash, cu2Service, cu3Service) {
+      $scope.msg = '';
+      cu2Service.VCredencial().then(function (object) {
+        $scope.res = object.data;
+        for (var key in object.data) {
+            $scope[key] = object.data[key];
+        }
+        if ($scope.logout) {
+            $location.path('/');
+        }
+      });
+      $scope.VEventoInscrito0 = function() {
+        $location.path('/VEventoInscrito');
       };
 
     }]);
@@ -232,5 +256,23 @@ eventosModule.controller('VEventoNoInscritoController',
           $location.path(label);
           $route.reload();
         });};
+
+    }]);
+eventosModule.controller('VCertificadoController', 
+   ['$scope', '$location', '$route', 'flash', 'cu2Service', 'cu3Service',
+    function ($scope, $location, $route, flash, cu2Service, cu3Service) {
+      $scope.msg = '';
+      cu2Service.VCertificado().then(function (object) {
+        $scope.res = object.data;
+        for (var key in object.data) {
+            $scope[key] = object.data[key];
+        }
+        if ($scope.logout) {
+            $location.path('/');
+        }
+      });
+      $scope.VEventoInscrito0 = function() {
+        $location.path('/VEventoInscrito');
+      };
 
     }]);

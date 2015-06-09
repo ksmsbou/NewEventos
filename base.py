@@ -4,7 +4,7 @@ from random import SystemRandom
 from datetime import timedelta
 from flask_sqlalchemy import SQLAlchemy
 import os
-from app import db
+from app import db 
 
 app = Flask(__name__, static_url_path='')
 manager = Manager(app)
@@ -27,9 +27,11 @@ def root():
 #Application code starts here
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+
 app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///'+ os.path.join(basedir,'apl.db')
 db = SQLAlchemy(app)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
 
 class Event(db.Model):
     idEvent        = db.Column(db.Integer, primary_key=True)

@@ -26,15 +26,15 @@ eventosModule.controller('VPrincipalAdministradorController',
         if ($scope.logout) {
             $location.path('/');
         }
-              var AVerEvento1Data = $scope.res.data1;
-              if(typeof AVerEvento1Data === 'undefined') AVerEvento1Data=[];
-              $scope.tableParams1 = new ngTableParams({
+              var AVerEvento2Data = $scope.res.data2;
+              if(typeof AVerEvento2Data === 'undefined') AVerEvento2Data=[];
+              $scope.tableParams2 = new ngTableParams({
                   page: 1,            // show first page
                   count: 10           // count per page
               }, {
-                  total: AVerEvento1Data.length, // length of data
+                  total: AVerEvento2Data.length, // length of data
                   getData: function($defer, params) {
-                      $defer.resolve(AVerEvento1Data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                      $defer.resolve(AVerEvento2Data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                   }
               });            
 
@@ -43,7 +43,7 @@ eventosModule.controller('VPrincipalAdministradorController',
       $scope.VCrearEvento0 = function() {
         $location.path('/VCrearEvento');
       };
-      $scope.ASalir2 = function() {
+      $scope.ASalir3 = function() {
           
         cu3Service.ASalir().then(function (object) {
           var msg = object.data["msg"];
@@ -53,7 +53,7 @@ eventosModule.controller('VPrincipalAdministradorController',
           $route.reload();
         });};
 
-      $scope.AVerEvento1 = function(id) {
+      $scope.AVerEvento2 = function(id) {
           var tableFields = [["idEvento","id"], ["nombre","Nombre"], ["fecha","Fecha"]];
           var arg = {};
           arg[tableFields[0][1]] = ((typeof id === 'object')?JSON.stringify(id):id);

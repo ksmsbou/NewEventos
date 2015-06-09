@@ -5,6 +5,7 @@ cu1 = Blueprint('cu1', __name__)
 from app import db, models
 import os
 
+
 @cu1.route('/cu1/ACrearEvento', methods=['POST'])
 def ACrearEvento():
     #Access to POST/PUT fields using request.form['name']
@@ -201,7 +202,7 @@ def VPrincipalAdministrador():
     e = []
     for event in events:
         e.append({'idEvento':event.idEvent,'nombre':event.nombre,'fecha':event.fecha})
-    res['data1'] = e
+    res['data2'] = e
 
     #Action code ends here
     return json.dumps(res)

@@ -19,7 +19,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
 <li class="navbar-text" ng-show="usuario.nombre" ng-bind="usuario.nombre"></li>
-<li><a ng-click="ASalir2()"
+<li><a ng-click="ASalir3()"
        ng-show="actor=='administrador' || actor=='usuario' || false">
     Salir</a></li>
 
@@ -28,12 +28,11 @@
     </div>
 </nav>
 
-        <h1 align="center"><b> Mis Eventos </b></h1><br>
-        <table ng-table="tableParams1" template-pagination="pager.html" class="table">
+        <h1 align="center"><b> Mis Eventos </b></h1><br>        <table ng-table="tableParams2" template-pagination="pager.html" class="table">
             <tr ng-repeat="row in $data">
                 <td data-title="'Nombre'">{{row['nombre']}}</td>
                 <td data-title="'Fecha'">{{row['fecha']}}</td>
-                <td><a ng-show="actor=='administrador' || false" ng-click="AVerEvento1(row['idEvento'])">Ver Detalles</a></td>
+                <td><a ng-show="actor=='administrador' || false" ng-click="AVerEvento2(row['idEvento'])">Ver Detalles</a></td>
             </tr>
         </table>
 

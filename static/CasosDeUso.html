@@ -251,13 +251,6 @@ Opcional.
  </li> <li>
   <p></p>
   <ul>
-   <li>URL: '/cu2/VEventosInscritos'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: usuario </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
    <li>URL: '/cu2/AVerEventoInscrito'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: usuario </li>
@@ -286,7 +279,7 @@ Opcional.
  </li> <li>
   <p></p>
   <ul>
-   <li>URL: '/cu2/VEventoInscrito'</li>
+   <li>URL: '/cu2/VEventosInscritos'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: usuario </li>
   </ul>
@@ -303,13 +296,20 @@ Opcional.
      <li>
       <p>resultado:</p>
       <ul>
-       <li>label:'/VEventoInscrito',</li>
-       <li> msg:"Credencial recibida".</li>
+       <li>label:'/VCredencial',</li>
+       <li> msg:"Credencial Recibida".</li>
       </ul>
      </li>
 
     </ol>
    </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VCredencial'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: Sin restricción de rol
   </ul>
  </li> <li>
   <p></p>
@@ -324,13 +324,20 @@ Opcional.
      <li>
       <p>resultado:</p>
       <ul>
-       <li>label:'/VEventoInscrito',</li>
-       <li> msg:"Certificado obtenido".</li>
+       <li>label:'/VCertificado',</li>
+       <li> msg:"Certificado recibido".</li>
       </ul>
      </li>
 
     </ol>
    </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VEventoInscrito'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
   </ul>
  </li> <li>
   <p></p>
@@ -363,13 +370,6 @@ Opcional.
  </li> <li>
   <p></p>
   <ul>
-   <li>URL: '/cu2/VEventosNoInscritos'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: usuario </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
    <li>URL: '/cu2/AReservarEvento'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: usuario </li>
@@ -398,9 +398,23 @@ Opcional.
  </li> <li>
   <p></p>
   <ul>
+   <li>URL: '/cu2/VEventosNoInscritos'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
    <li>URL: '/cu2/VEventoNoInscrito'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: usuario </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
+   <li>URL: '/cu2/VCertificado'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: Sin restricción de rol
   </ul>
  </li>
 </ol>

@@ -9,7 +9,7 @@ from app import db, models
 def ACertificado():
     #POST/PUT parameters
     params = request.get_json()
-    results = [{'label':'/VEventoInscrito', 'msg':[ur'Certificado obtenido']}, ]
+    results = [{'label':'/VCertificado', 'msg':[ur'Certificado recibido']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
@@ -28,7 +28,7 @@ def ACertificado():
 def ACredencial():
     #POST/PUT parameters
     params = request.get_json()
-    results = [{'label':'/VEventoInscrito', 'msg':[ur'Credencial recibida']}, ]
+    results = [{'label':'/VCredencial', 'msg':[ur'Credencial Recibida']}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
@@ -103,6 +103,47 @@ def AVerEventoNoInscrito():
             session.pop("actor", None)
         else:
             session['actor'] = res['actor']
+    return json.dumps(res)
+
+
+
+@cu2.route('/cu2/VCertificado')
+def VCertificado():
+    res = {}
+    if "actor" in session:
+        res['actor']=session['actor']
+    #Action code goes here, res should be a JSON structure
+
+    event = models.Event.query.get(int(session['idevento']))
+    e = {'nombre':event.nombre,'fecha':event.fecha, 'ubicacion': event.ubicacion}
+
+    person = models.Person.query.get(int(session['usrid']))
+    e.update({'nperson':person.nombres, 'aperson':person.apellidos})
+
+    res['data103'] = e
+
+    #Action code ends here
+    return json.dumps(res)
+
+
+
+@cu2.route('/cu2/VCredencial')
+def VCredencial():
+    res = {}
+    if "actor" in session:
+        res['actor']=session['actor']
+    #Action code goes here, res should be a JSON structure
+
+    event = models.Event.query.get(int(session['idevento']))
+    e = {'nombre':event.nombre,'idevento':event.idEvent}
+
+    person = models.Person.query.get(int(session['usrid']))
+    e.update({'nperson':person.nombres, 'aperson':person.apellidos, 'idperson':person.idPerson})
+
+    res['data102'] = e
+
+
+    #Action code ends here
     return json.dumps(res)
 
 
