@@ -1,0 +1,60 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" 
+                    data-toggle="collapse" 
+                    data-target="#contenido-plegable">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" ></span>
+        </div>
+        <div class="collapse navbar-collapse" id="contenido-plegable">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a ng-click="VEventoInscrito0()"
+                ng-show="actor=='usuario' || false">
+                Regresar</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <li class="navbar-text" ng-show="usuario.nombre" ng-bind="usuario.nombre"></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <h1 align="center"><b> Credencial </b></h1>
+    <br>
+    <h3 align="rigth"><b> Acreditado a: {{res['data102']['nperson']}} {{res['data102']['aperson']}}</b></h3>
+    <h3 align="rigth"><b> Con carácter de:  PARTICIPANTE </b></h3>
+    <h3 align="rigth"><b> Nombre del Evento: </b></h3>
+    <h1 align="center"><b><i> {{res['data102']['nombre']}} </i></b></h1>
+    <br><br>
+    <h3 align="center"><b> Código: 0-011{{res['data102']['idevento']}}{{res['data102']['idperson']}} </b></h3>
+    <img align="right" src="img/firma.jpg" height="190" width="190">
+    <img align="left" src="img/sello.jpg" height="190" width="190">
+
+
+    <script type="text/javascript"><!--
+
+    function credencialPDF() {
+    var doc = new jsPDF('p','mm','letter');
+    doc.setFontSize(22);
+    doc.setTextColor(0,85,136);
+    doc.setFont("helvetica");
+    doc.setFontType("bold");
+    doc.text(20, 140, 'Credencial ');
+    doc.save('Credencial.pdf');
+    }
+
+    --></script>
+
+    <br><br><br><br><br>
+    <br><br><br><br><br>
+    <div >
+        <button onclick="credencialPDF()" class="center-block btn btn-perso btn-default btn-lg"> Descargar </button>
+    </div>
+    <br>
+
+<div id="right"></div>
