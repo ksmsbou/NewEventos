@@ -1,0 +1,12 @@
+div.ccentral {
+	background-image: url('../img/background.jpg');
+    align: "center";
+    background-size: 1060px 400px;
+    background-repeat: no-repeat, repeat;
+
+    top: 0px;
+    margin-top:  0%;
+    margin-left: 0%;
+    margin-right:8%;
+}
+
