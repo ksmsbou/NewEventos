@@ -166,7 +166,7 @@ eventosModule.controller('VVerEventoController',
         });};
 
       $scope.APersonaAsistio3 = function(id) {
-          var tableFields = [["idPersona","id"], ["nombres","Nombre"], ["apellidos","Apellidos"]];
+          var tableFields = [["idPersona","id"], ["nombres","Nombre"], ["apellidos","Apellidos"], ["asistencia","Asistio"]];
           var arg = {};
           arg[tableFields[0][1]] = ((typeof id === 'object')?JSON.stringify(id):id);
           cu1Service.APersonaAsistio(arg).then(function (object) {

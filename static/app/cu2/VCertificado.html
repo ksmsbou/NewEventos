@@ -24,47 +24,46 @@
     </div>
 </nav>
 
-    <div class="ccentral">
-    <br><br>
+    <div id="render_me" class="ccentral">
+    <br><br><br>
     <h1 align="center"><b> Certificado </b></h1>
     <br>
     <h4 align="center"><b> Se otorga el presente certificado a: {{res['data103']['nperson']}} {{res['data103']['aperson']}}
                      </b>
     </h4>
-    <h4 align="center"><b> Por su participacion en: </b></h4>
+    <h4 align="center"><b> Por su participación en: </b></h4>
     <h1 align="center"><b><i> {{res['data103']['nombre']}} </i></b></h1>
     <br><br>
-    <h4 align="rigth"><b> Que tuvo lugar en: {{res['data103']['ubicacion']}} </b></h4>
-    <h4 align="rigth"><b> Y cuya fecha fue: {{res['data103']['fecha']}} </b></h4>
-    <!--<img align="right" src="img/firma.jpg" height="190" width="190">
-    <img align="left" src="img/sello.jpg" height="190" width="190"> -->
+        <div style="margin-right:100px;">
+    <h4 align="right"><b> Que tuvo lugar en: {{res['data103']['ubicacion']}} </b></h4>
+    <h4 align="right"><b> Y cuya fecha fue: {{res['data103']['fecha']}} </b></h4>
+        </div>
+
+    </br></br></br></br></br></br>
     </div>
+
 
     <script type="text/javascript"><!--
 
-    function certificatePDF() {
-    var doc = new jsPDF('p','mm','letter');
-    doc.setFontSize(22);
-    doc.setTextColor(0,85,136);
-    doc.setFont("helvetica");
-    doc.setFontType("bold");
-    doc.text(20, 140, 'Certificado ');
+    function create() {
+
+    var doc = new jsPDF();
+
+    doc.fromHTML($('#render_me').get(0), 15, 15, {
+        'width': 180
+    });
+
     doc.save('Certificado.pdf');
+
     }
 
-    var specialElementHandlers = {
-	'#editor': function(element, renderer){
-		return true;
-	}
-};
-
-   --></script>
+    --></script>
 
     <br><br><br>
 
 
     <div >
-        <button onclick="certificatePDF()" class="center-block btn btn-perso btn-lg "> Descargar </button>
+        <button id="certificado" onclick="create()" class="center-block btn btn-perso btn-lg "> Descargar </button>
     </div>
     <br>
 

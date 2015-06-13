@@ -13,19 +13,6 @@ eventosModule.service('cu2Service', ['$q', '$http', function($q, $http) {
     //    return deferred.promise;
     };
 
-    this.AVerEventoInscrito = function(args) {
-        if(typeof args == 'undefined') args={};
-        return $http({
-          url: 'cu2/AVerEventoInscrito',
-          method: 'GET',
-          params: args
-        });
-    //    var labels = ["/VEventoInscrito", "/VEventosInscritos", ];
-    //    var res = labels[0];
-    //    var deferred = $q.defer();
-    //    deferred.resolve(res);
-    //    return deferred.promise;
-    };
     this.VEventosInscritos = function(args) {
         if(typeof args == 'undefined') args={};
         return $http({
@@ -39,6 +26,19 @@ eventosModule.service('cu2Service', ['$q', '$http', function($q, $http) {
     //    return deferred.promise;
     };
 
+    this.AVerEventoInscrito = function(args) {
+        if(typeof args == 'undefined') args={};
+        return $http({
+          url: 'cu2/AVerEventoInscrito',
+          method: 'GET',
+          params: args
+        });
+    //    var labels = ["/VEventoInscrito", "/VEventosInscritos", ];
+    //    var res = labels[0];
+    //    var deferred = $q.defer();
+    //    deferred.resolve(res);
+    //    return deferred.promise;
+    };
     this.ACredencial = function(args) {
         if(typeof args == 'undefined') args={};
         return $http({

@@ -58,7 +58,7 @@ Opcional.
      </li>
      <li>
 <p>Precondición: ¬eventoValido(nombre,descripccion,ubicacion,fecha,capacidad,disponibilidad,afiche).</p>
-<p>Postcondicion: true.</p>
+<p>Postcondicion: true (No ocurre nada, solo se va a la vista destino).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VCrearEvento',</li>
@@ -97,7 +97,7 @@ Opcional.
      </li>
      <li>
 <p>Precondición: ¬creador(nickname,idevento).</p>
-<p>Postcondicion: true.</p>
+<p>Postcondicion: true (El Evento no se puede ver).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VPrincipalAdministrador',</li>
@@ -129,7 +129,7 @@ Opcional.
      </li>
      <li>
 <p>Precondición: ¬creador(nickname,idevento).</p>
-<p>Postcondicion: true.</p>
+<p>Postcondicion: true (El Evento no puede ser eliminado).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VVerEvento',</li>
@@ -158,6 +158,8 @@ Opcional.
     <p><strong>Cursos posibles</strong></p>
     <ol>
      <li>
+<p>Precondición: creador(nickname).</p>
+<p>Postcondicion: asistenciaConfirmada(idPerson,idEvento).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VVerEvento',</li>
@@ -165,6 +167,8 @@ Opcional.
       </ul>
      </li>
      <li>
+<p>Precondición: ¬creador(nickname).</p>
+<p>Postcondicion: ¬asistenciaConfirmada(idPerson,idEvento).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VVerEvento',</li>
@@ -218,7 +222,7 @@ Opcional.
      </li>
      <li>
 <p>Precondición: ¬eventoValido(nombre,descripccion,ubicacion,fecha,capacidad,disponibilidad,afiche) or ¬creador(nickname,idevento).</p>
-<p>Postcondicion: true.</p>
+<p>Postcondicion: true (No ocurre nada, no se modifica el Evento).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VModificarEvento',</li>
@@ -251,6 +255,13 @@ Opcional.
  </li> <li>
   <p></p>
   <ul>
+   <li>URL: '/cu2/VEventosInscritos'</li>
+   <li>Método: GET</li><li>Formato de salida: JSON</li>
+   <li>Roles: usuario </li>
+  </ul>
+ </li> <li>
+  <p></p>
+  <ul>
    <li>URL: '/cu2/AVerEventoInscrito'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: usuario </li>
@@ -259,6 +270,8 @@ Opcional.
     <p><strong>Cursos posibles</strong></p>
     <ol>
      <li>
+<p>Precondición: tieneEventosInscritos(nickname).</p>
+<p>Postcondicion: verEventosInscritos(nickname).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VEventoInscrito',</li>
@@ -266,6 +279,8 @@ Opcional.
       </ul>
      </li>
      <li>
+<p>Precondición: errorenVista().</p>
+<p>Postcondicion: ¬verEventosInscritos(nickname).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VEventosInscritos',</li>
@@ -279,13 +294,6 @@ Opcional.
  </li> <li>
   <p></p>
   <ul>
-   <li>URL: '/cu2/VEventosInscritos'</li>
-   <li>Método: GET</li><li>Formato de salida: JSON</li>
-   <li>Roles: usuario </li>
-  </ul>
- </li> <li>
-  <p></p>
-  <ul>
    <li>URL: '/cu2/ACredencial'</li>
    <li>Método: GET</li><li>Formato de salida: JSON</li>
    <li>Roles: usuario </li>
@@ -294,6 +302,8 @@ Opcional.
     <p><strong>Cursos posibles</strong></p>
     <ol>
      <li>
+<p>Precondición: true.</p>
+<p>Postcondicion: credencialRecibida(nickname).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VCredencial',</li>
@@ -322,6 +332,8 @@ Opcional.
     <p><strong>Cursos posibles</strong></p>
     <ol>
      <li>
+<p>Precondición: asistenciaConfirmada(nickname).</p>
+<p>Postcondicion: certificadoRecibido(nickname).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VCertificado',</li>
@@ -350,6 +362,8 @@ Opcional.
     <p><strong>Cursos posibles</strong></p>
     <ol>
      <li>
+<p>Precondición: tieneEventosNoInscritos(nickname).</p>
+<p>Postcondicion: verEventosNoInscritos(nickname).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VEventoNoInscrito',</li>
@@ -357,6 +371,8 @@ Opcional.
       </ul>
      </li>
      <li>
+<p>Precondición: errorenVista().</p>
+<p>Postcondicion: ¬verEventosNoInscritos(nickname).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VEventosNoInscritos',</li>
@@ -378,6 +394,8 @@ Opcional.
     <p><strong>Cursos posibles</strong></p>
     <ol>
      <li>
+<p>Precondición: disponible(idEvento).</p>
+<p>Postcondicion: eventoReservado(nickname,idEvento).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VEventosInscritos',</li>
@@ -385,6 +403,8 @@ Opcional.
       </ul>
      </li>
      <li>
+<p>Precondición: ¬disponibleEvento(idEvento).</p>
+<p>Postcondicion: ¬eventoReservado(nickname,idEvento).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VEventosNoInscritos',</li>
@@ -432,10 +452,12 @@ Opcional.
     <p><strong>Cursos posibles</strong></p>
     <ol>
      <li>
+<p>Precondición: iniciarSesionAdmin(nickname) || iniciarSesionUsuario(nickname).</p>
+<p>Postcondicion: true (El administrador/usuario deja su sesión y va a su página destino).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VPrincipal',</li>
-       <li> msg:"Sesion Cerrada".</li>
+       <li> msg:"Sesión Cerrada".</li>
       </ul>
 <p>Se continúa sin rol específico.</p>
      </li>
@@ -470,7 +492,7 @@ Requerido.
     <ol>
      <li><br>
 <p>Precondición: usuarioValido(nickname,ucontrasena) and ¬usuarioEsAdmin(nickname).</p>
-<p>Postcondicion: iniciadaSesion(nickname).</p>
+<p>Postcondicion: iniciarSesion(nickname).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VPrincipalUsuario',</li>
@@ -480,7 +502,7 @@ Requerido.
      </li>
      <li>
 <p>Precondición: usuarioValido(nickname,ucontrasena) and usuarioEsAdmin(nickname).</p>
-<p>Postcondicion: iniciaSesionAdmin(nickname).</p>
+<p>Postcondicion: iniciarSesionAdmin(nickname).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VPrincipalAdministrador',</li>
@@ -490,7 +512,7 @@ Requerido.
      </li>
      <li>
 <p>Precondición: ¬usuarioValido(nickname,ucontrasena).</p>
-<p>Postcondicion: ¬iniciadaSesion().</p>
+<p>Postcondicion: ¬iniciarSesionAdmin(nickname) && ¬iniciarSesionUsuario(nickname).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VPrincipal',</li>
@@ -541,9 +563,6 @@ Requerido.
 Expresión de validación: <code>/[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/</code>. 
      </li>     <li>administrador - <br> 
 Requerido. 
-Long. mínima: <code>1</code>. 
-Long. máxima: <code>1</code>. 
-Expresión de validación: <code>/(s|n)/i</code>. 
      </li>
     </ul>
    </li>
@@ -554,7 +573,7 @@ Expresión de validación: <code>/(s|n)/i</code>.
     <ol>
      <li>
 <p>Precondición: nuevoUsuarioValido(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
-<p>Postcondicion: existeUsuario(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
+<p>Postcondicion: creaUsuario(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VPrincipal',</li>
@@ -563,7 +582,7 @@ Expresión de validación: <code>/(s|n)/i</code>.
      </li>
      <li>
 <p>Precondición: ¬nuevoUsuarioValido(nombres,apellidos,nickname,contrase_a,edad,telefono,correo).</p>
-<p>Postcondicion: true.</p>
+<p>Postcondicion: true (No ocurre nada más, se direcciona al destino).</p>
       <p>resultado:</p>
       <ul>
        <li>label:'/VRegistro',</li>
