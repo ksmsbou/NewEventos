@@ -11,7 +11,7 @@ manager = Manager(app)
 manager.add_command("runserver", Server(
     use_debugger = True,
     use_reloader = True,
-    host = '127.0.0.1')
+    host = '0.0.0.0')
 )
 
 @app.before_request

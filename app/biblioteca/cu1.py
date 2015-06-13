@@ -21,20 +21,30 @@ def ACrearEvento():
     fec = request.form['fecha']
     cap = request.form['capacidad']
     dis = cap
-    if 'afiche' in request.files:
-        afic = request.files['afiche']
-        if afic.filename[len(afic.filename)-4:] == '.pdf':
-            path = os.path.abspath(os.path.dirname(__file__))
+    # TODO Buscar forma de mostrar todos los errores a la vez sin repetir codigo
+    evento = models.Event.query.filter(models.Event.nombre == nam).first()
+    if evento is None:
+        if 'afiche' in request.files:
+            afic = request.files['afiche']
+            if afic.filename[len(afic.filename)-4:] == '.pdf':
+                path = os.path.abspath(os.path.dirname(__file__))
+                new_event = models.Event(creador=cre,nombre=nam,descripcion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis)
+                db.session.add(new_event)
+                evento = models.Event.query.filter(models.Event.nombre == nam).first()
+                afic.save(path[0:len(path)-14]+'/afiches/afiche'+str(evento.idEvent)+'.pdf')
+                db.session.commit()
+            else:
+                results[1]['msg'].append('Tipo de archivo no permitido, el afiche debe estar en formato PDF de tamaño menor a 16MB.')
+                res = results[1]
+        else:
             new_event = models.Event(creador=cre,nombre=nam,descripcion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis)
             db.session.add(new_event)
-            evento = models.Event.query.filter(models.Event.nombre == nam).first()
-            afic.save(path[0:len(path)-14]+'/afiches/afiche'+str(evento.idEvent)+'.pdf')
-        else:
-            res = results[1]
+            db.session.commit()
     else:
-        new_event = models.Event(creador=cre,nombre=nam,descripcion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis)
-        db.session.add(new_event)
-    db.session.commit()
+        results[1]['msg'].append('Nombre de evento no disponible.')
+        res = results[1]
+    if res['label'] == '/VCrearEvento':
+        session['formEv'] = {'nombre': nam, 'descripcion': des, 'ubicacion': ubi, 'fecha': fec, 'capacidad': int(cap)}
 
     #Action code ends here
     if "actor" in res:
@@ -94,16 +104,23 @@ def AModificarEvento():
     cap = int(request.form['capacidad'])
     evento = models.Event.query.filter(models.Event.idEvent == session['idevento']).first()
     ocupados = int(evento.capacidad) - int(evento.disponibilidad)
+    # TODO Buscar forma de mostrar todos los errores sin repetir codigo
     if cap < ocupados :
+        results[1]['msg'].append('Capacidad no puede ser menor a las reservaciones ya hechas, reservaciones: '+str(ocupados))
         res = results[1]
-    else :
-        evento.nombre = nam
-        evento.descripcion = des
-        evento.ubicacion = ubi
-        evento.fecha = fec
-        evento.capacidad = cap
-        evento.disponibilidad = cap - ocupados
-        db.session.commit()
+    else:
+        old_evento = models.Event.query.filter(models.Event.nombre == nam).first()
+        if old_evento is None:
+            evento.nombre = nam
+            evento.descripcion = des
+            evento.ubicacion = ubi
+            evento.fecha = fec
+            evento.capacidad = cap
+            evento.disponibilidad = cap - ocupados
+            db.session.commit()
+        else:
+            results[1]['msg'].append('Nombre de evento ya existe')
+            res = results[1]
 
     #Action code ends here
     if "actor" in res:
@@ -123,6 +140,18 @@ def APersonaAsistio():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
+    usr_to_confirm = request.args['id']
+    reserv = models.Reservacion.query.filter(models.Reservacion.idPerson == usr_to_confirm, models.Reservacion.idEvent == session['idevento']).first()
+    if reserv is None:
+        results[1]['msg'].append('Error. Reservacion no existente')
+        res = results[1]
+    else:
+        if reserv.asistio:
+            reserv.asistio = False
+            res['msg'] = [ur'Asistencia Desconfirmada']
+        else:
+            reserv.asistio = True
+        db.session.commit()
 
     #Action code ends here
     if "actor" in res:
@@ -161,6 +190,9 @@ def VCrearEvento():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    if 'formEv' in session:
+        res['fEvento'] = session['formEv']
+        del session['formEv']
 
     #Action code ends here
     return json.dumps(res)
@@ -175,15 +207,14 @@ def VModificarEvento():
     #Action code goes here, res should be a JSON structure
 
     evento = models.Event.query.filter(models.Event.idEvent==session['idevento']).first()
-    form = {
-        'nombre' : evento.nombre,
-        'descripcion' : evento.descripcion,
-        'ubicacion' : evento.ubicacion,
-        'fecha' : evento.fecha,
-        'capacidad' : evento.capacidad,
-        'disponibilidad' : evento.disponibilidad,
+    res['fEvento'] = {
+        'nombre': evento.nombre,
+        'descripcion': evento.descripcion,
+        'ubicacion': evento.ubicacion,
+        'fecha': evento.fecha,
+        'capacidad': evento.capacidad,
+        'disponibilidad': evento.disponibilidad,
     }
-    res['fEvento'] = form
 
     #Action code ends here
     return json.dumps(res)
@@ -222,10 +253,15 @@ def VVerEvento():
              'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
     res['data100'] = e
     p = []
+    asistencia = 'Si'
     reservaciones = models.Reservacion.query.filter(models.Reservacion.idEvent == session['idevento'])
     for reservacion in reservaciones:
+        if reservacion.asistio:
+            asistencia = 'Si'
+        else:
+            asistencia = 'No'
         persona = models.Person.query.filter(models.Person.idPerson == reservacion.idPerson).first()
-        p.append({'idPersona':persona.idPerson,'nombres':persona.nombres,'apellidos':persona.apellidos})
+        p.append({'idPersona':persona.idPerson,'nombres':persona.nombres,'apellidos':persona.apellidos,'asistencia':asistencia})
     res['data3'] = p
 
     #Action code ends here

@@ -155,11 +155,14 @@ def VEventoInscrito():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
-    # TODO Comprobar que el usuario actual puede acceder al evento actual en la instancia actual.
     event = models.Event.query.get(int(session['idevento']))
-    e = {'nombre':event.nombre,'descripcion':event.descripcion,'ubicacion':event.ubicacion,'fecha':event.fecha,
-             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
-    res['data101'] = e
+    reserv = models.Reservacion.query.filter(models.Reservacion.idEvent == session['idevento'], models.Reservacion.idPerson == session['usrid']).first()
+    if reserv is not None:
+        res['data101'] = {'nombre':event.nombre,'descripcion':event.descripcion,'ubicacion':event.ubicacion,'fecha':event.fecha,
+                 'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
+    else:
+        # TODO Pensar una mejor manera de informar al usuario
+        res['data101'] = {'nombre':'Error en el intento de acceso a pagina, evento no reservado'}
 
     #Action code ends here
     return json.dumps(res)
@@ -173,11 +176,14 @@ def VEventoNoInscrito():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
-    # TODO Comprobar que el usuario actual puede acceder al evento actual en la instancia actual.
     event = models.Event.query.get(int(session['idevento']))
-    e = {'nombre':event.nombre,'descripcion':event.descripcion,'ubicacion':event.ubicacion,'fecha':event.fecha,
-             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
-    res['data102'] = e
+    reserv = models.Reservacion.query.filter(models.Reservacion.idEvent == session['idevento'], models.Reservacion.idPerson == session['usrid']).first()
+    if reserv is None:
+        res['data102'] = {'nombre':event.nombre,'descripcion':event.descripcion,'ubicacion':event.ubicacion,'fecha':event.fecha,
+                'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
+    else:
+        # TODO Pensar una mejor manera de informar al usuario
+        res['data102'] = {'nombre':'Error en el intento de acceso a pagina, evento ya reservado'}
 
     #Action code ends here
     return json.dumps(res)

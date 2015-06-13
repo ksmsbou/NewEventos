@@ -18,6 +18,7 @@ def AIdentificacion():
     registered_user = models.Person.query.filter_by(nickname=username,contrasena=password).first()
 
     if registered_user is None:
+        results[2]['msg'].append('Nicnkname o contraseña incorrectos')
         res = results[2]
     else:
         session['usrid'] = registered_user.idPerson
@@ -44,6 +45,7 @@ def ARegistro():
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
+    error = False
     name = params['nombres']
     lnam = params['apellidos']
     nick = params['nickname']
@@ -51,14 +53,24 @@ def ARegistro():
     ages = params['edad']
     phon = params['telefono']
     mail = params['correo']
-    admi = params['administrador']
-    if admi == 'n' or admi == 'N':
-        new_person = models.Person(nombres=name,apellidos=lnam,nickname=nick,contrasena=pasw,edad=ages,telefono=phon,correo=mail,admin=False)
-    else:
+    pers_nick = models.Person.query.filter(models.Person.nickname == nick).first()
+    if pers_nick is not None:
+        results[1]['msg'].append('Nickname no disponible')
+        error = True
+    pers_mail = models.Person.query.filter(models.Person.correo == mail).first()
+    if pers_mail is not None:
+        results[1]['msg'].append('Correo no disponible')
+        error = True
+    if 'administrador' in params:
         new_person = models.Person(nombres=name,apellidos=lnam,nickname=nick,contrasena=pasw,edad=ages,telefono=phon,correo=mail,admin=True)
-    db.session.add(new_person)
-    db.session.commit()
-
+    else:
+        new_person = models.Person(nombres=name,apellidos=lnam,nickname=nick,contrasena=pasw,edad=ages,telefono=phon,correo=mail,admin=False)
+    if not error:
+        db.session.add(new_person)
+        db.session.commit()
+    else:
+        res = results[1]
+        session['formPers'] = {'nombres': name, 'apellidos': lnam, 'nickname': nick, 'edad': ages, 'telefono': phon, 'correo': mail}
 
     #Action code ends here
     if "actor" in res:
@@ -74,7 +86,7 @@ def ARegistro():
 def ASalir():
     #POST/PUT parameters
     params = request.get_json()
-    results = [{'label':'/VPrincipal', 'msg':[ur'Sesion Cerrada'], "actor":None}, ]
+    results = [{'label':'/VPrincipal', 'msg':[ur'Sesión Cerrada'], "actor":None}, ]
     res = results[0]
     #Action code goes here, res should be a list with a label and a message
 
@@ -111,6 +123,9 @@ def VRegistro():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
+    if 'formPers' in session:
+        res['fRegistro'] = session['formPers']
+        del session['formPers']
 
     #Action code ends here
     return json.dumps(res)

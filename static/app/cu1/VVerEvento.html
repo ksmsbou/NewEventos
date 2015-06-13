@@ -51,7 +51,8 @@
             <tr ng-repeat="row in $data">
                 <td data-title="'Nombre'">{{row['nombres']}}</td>
                 <td data-title="'Apellidos'">{{row['apellidos']}}</td>
-                <td><a ng-show="actor=='administrador' || false" ng-click="APersonaAsistio3(row['idPersona'])">Confirmar Asistencia</a></td>
+                <td data-title="'Asistio'">{{row['asistencia']}}</td>
+                <td><a ng-show="actor=='administrador' || false" ng-click="APersonaAsistio3(row['idPersona'])">Cambiar Asistencia</a></td>
             </tr>
         </table>
 
