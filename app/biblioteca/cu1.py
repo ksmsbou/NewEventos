@@ -31,7 +31,7 @@ def ACrearEvento():
                 new_event = models.Event(creador=cre,nombre=nam,descripcion=des,ubicacion=ubi,fecha=fec,capacidad=cap,disponibilidad=dis)
                 db.session.add(new_event)
                 evento = models.Event.query.filter(models.Event.nombre == nam).first()
-                afic.save(path[0:len(path)-14]+'/afiches/afiche'+str(evento.idEvent)+'.pdf')
+                afic.save(path[0:len(path)-14]+'static/afiches/afiche'+str(evento.idEvent)+'.pdf')
                 db.session.commit()
             else:
                 results[1]['msg'].append('Tipo de archivo no permitido, el afiche debe estar en formato PDF de tamaño menor a 16MB.')
@@ -71,8 +71,8 @@ def AEliminarEvento():
     db.session.commit()
     #Elimina el afiche del evento si existe
     path = os.path.abspath(os.path.dirname(__file__))
-    if os.path.exists(path[0:len(path)-14]+'/afiches/afiche'+str(session['idevento'])+'.pdf'):
-        os.remove(path[0:len(path)-14]+'/afiches/afiche'+str(session['idevento'])+'.pdf')
+    if os.path.exists(path[0:len(path)-14]+'static/afiches/afiche'+str(session['idevento'])+'.pdf'):
+        os.remove(path[0:len(path)-14]+'static/afiches/afiche'+str(session['idevento'])+'.pdf')
     #Elimina ahora el evento
     event = models.Event.query.filter(models.Event.idEvent == session['idevento']).first()
     db.session.delete(event)
@@ -115,15 +115,15 @@ def AModificarEvento():
                 afic = request.files['afiche']
                 if afic.filename[len(afic.filename)-4:] == '.pdf': # Ver si el archivo de afiche es un pdf
                     path = os.path.abspath(os.path.dirname(__file__))
-                    if os.path.exists(path[0:len(path)-14]+'/afiches/afiche'+str(session['idevento'])+'.pdf'): # Ver si ya hay un afiche asociado a este evento
-                        os.remove(path[0:len(path)-14]+'/afiches/afiche'+str(session['idevento'])+'.pdf') # Borrarlo si lo hay
+                    if os.path.exists(path[0:len(path)-14]+'static/afiches/afiche'+str(session['idevento'])+'.pdf'): # Ver si ya hay un afiche asociado a este evento
+                        os.remove(path[0:len(path)-14]+'static/afiches/afiche'+str(session['idevento'])+'.pdf') # Borrarlo si lo hay
                     evento.nombre = nam
                     evento.descripcion = des
                     evento.ubicacion = ubi
                     evento.fecha = fec
                     evento.capacidad = cap
                     evento.disponibilidad = cap - ocupados
-                    afic.save(path[0:len(path)-14]+'/afiches/afiche'+str(evento.idEvent)+'.pdf')
+                    afic.save(path[0:len(path)-14]+'static/afiches/afiche'+str(evento.idEvent)+'.pdf')
                     db.session.commit()
                 else:
                     results[1]['msg'].append('Tipo de archivo no permitido, el afiche debe estar en formato PDF de tamaño menor a 16MB.')
@@ -270,11 +270,11 @@ def VVerEvento():
     path = os.path.abspath(os.path.dirname(__file__))
     pdfpath = ''
     e = {'nombre':event.nombre,'descripcion':event.descripcion,'ubicacion':event.ubicacion,'fecha':event.fecha,
-             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad,'id':event.idEvent}
-    if os.path.exists(path[0:len(path)-14]+'/afiches/afiche'+str(event.idEvent)+'.pdf'):
-        pdfpath = path[0:len(path)-14]+'/afiches/afiche'+str(event.idEvent)+'.pdf'
-        e['path'] = pdfpath
-        e['filename'] = 'afiche'+str(event.idEvent)+'.pdf'
+             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
+    if os.path.exists(path[0:len(path)-14]+'static/afiches/afiche'+str(event.idEvent)+'.pdf'):
+        e['path'] = 'afiches/afiche'+str(event.idEvent)+'.pdf'
+    else:
+        e['path'] = 'afiches/sinafiche.pdf'
     res['data100'] = e
     p = []
     asistencia = 'Si'

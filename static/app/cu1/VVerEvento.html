@@ -33,22 +33,30 @@
         </div>
     </div>
 </nav>
-    <h1 align="center">Datos del Evento</h1><br>
-    <table template-pagination="pager.html" class="table table table-striped" align="center">
-        <tr><td align="center"><b>{{"Nombre:           " + res['data100']['nombre']}}</b></td></tr>
-        <tr><td align="center"><b>{{"Descripción:      " + res['data100']['descripcion']}}</b></td></tr>
-        <tr><td align="center"><b>{{"Ubicación:        " + res['data100']['ubicacion']}}</b></td></tr>
-        <tr><td align="center"><b>{{"Fecha:            " + res['data100']['fecha']}}</b></td></tr>
-        <tr><td align="center"><b>{{"Capacidad:        " + res['data100']['capacidad']}}</b></td></tr>
-        <tr><td align="center"><b>{{"Disponibilidad:   " + res['data100']['disponibilidad']}}</b></td></tr>
-    </table>
-    <button class="btn btn-perso btn-lg btn-block">
-        Ver Afiche
-    </button>
 
-        <br>
-        <h3 align="center">Lista de Participantes</h3>
-        <br>
+<table>
+    <td width="50%" height="100%">
+        <h1 align="center">Datos del Evento</h1><br>
+        <table template-pagination="pager.html" class="table table table-striped" align="center">
+            <tr><td align="center"><b>{{"Nombre:           " + res['data100']['nombre']}}</b></td></tr>
+            <tr><td align="center"><b>{{"Descripción:      " + res['data100']['descripcion']}}</b></td></tr>
+            <tr><td align="center"><b>{{"Ubicación:        " + res['data100']['ubicacion']}}</b></td></tr>
+            <tr><td align="center"><b>{{"Fecha:            " + res['data100']['fecha']}}</b></td></tr>
+            <tr><td align="center"><b>{{"Capacidad:        " + res['data100']['capacidad']}}</b></td></tr>
+            <tr><td align="center"><b>{{"Disponibilidad:   " + res['data100']['disponibilidad']}}</b></td></tr>
+        </table>
+    </td>
+    <td width="50%" height="100%">
+        <div width="100%" height="100%">
+            <iframe width="100%" height="500px" src="{{res['data100']['path']}}"></iframe>
+        </div>
+    </td>
+</table>
+
+<br>
+<h3 align="center">Lista de Participantes</h3>
+<br>
+
         <table ng-table="tableParams3" template-pagination="pager.html" class="table">
             <tr ng-repeat="row in $data">
                 <td data-title="'Nombre'">{{row['nombres']}}</td>
