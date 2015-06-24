@@ -33,16 +33,18 @@
         </div>
     </div>
 </nav>
-
-        <h1 align="center">Datos del Evento</h1><br>
-        <table template-pagination="pager.html" class="table table table-striped" align="center">
-            <tr><td><b>{{"Nombre:           " + res['data100']['nombre']}}</b></td></tr>
-            <tr><td><b>{{"Descripción:      " + res['data100']['descripcion']}}</b></td></tr>
-            <tr><td><b>{{"Ubicación:        " + res['data100']['ubicacion']}}</b></td></tr>
-            <tr><td><b>{{"Fecha:            " + res['data100']['fecha']}}</b></td></tr>
-            <tr><td><b>{{"Capacidad:        " + res['data100']['capacidad']}}</b></td></tr>
-            <tr><td><b>{{"Disponibilidad:   " + res['data100']['disponibilidad']}}</b></td></tr>
-        </table>
+    <h1 align="center">Datos del Evento</h1><br>
+    <table template-pagination="pager.html" class="table table table-striped" align="center">
+        <tr><td align="center"><b>{{"Nombre:           " + res['data100']['nombre']}}</b></td></tr>
+        <tr><td align="center"><b>{{"Descripción:      " + res['data100']['descripcion']}}</b></td></tr>
+        <tr><td align="center"><b>{{"Ubicación:        " + res['data100']['ubicacion']}}</b></td></tr>
+        <tr><td align="center"><b>{{"Fecha:            " + res['data100']['fecha']}}</b></td></tr>
+        <tr><td align="center"><b>{{"Capacidad:        " + res['data100']['capacidad']}}</b></td></tr>
+        <tr><td align="center"><b>{{"Disponibilidad:   " + res['data100']['disponibilidad']}}</b></td></tr>
+    </table>
+    <button class="btn btn-perso btn-lg btn-block">
+        Ver Afiche
+    </button>
 
         <br>
         <h3 align="center">Lista de Participantes</h3>

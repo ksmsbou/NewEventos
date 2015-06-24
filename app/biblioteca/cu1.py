@@ -104,20 +104,38 @@ def AModificarEvento():
     cap = int(request.form['capacidad'])
     evento = models.Event.query.filter(models.Event.idEvent == session['idevento']).first()
     ocupados = int(evento.capacidad) - int(evento.disponibilidad)
-    # TODO Buscar forma de mostrar todos los errores sin repetir codigo
-    if cap < ocupados :
+    # TODO Buscar forma de mostrar todos los errores a la vez sin repetir codigo
+    if cap < ocupados:
         results[1]['msg'].append('Capacidad no puede ser menor a las reservaciones ya hechas, reservaciones: '+str(ocupados))
         res = results[1]
     else:
         old_evento = models.Event.query.filter(models.Event.nombre == nam).first()
-        if old_evento is None:
-            evento.nombre = nam
-            evento.descripcion = des
-            evento.ubicacion = ubi
-            evento.fecha = fec
-            evento.capacidad = cap
-            evento.disponibilidad = cap - ocupados
-            db.session.commit()
+        if (old_evento is None) or (evento.nombre == nam): # Ver si ya hay un evento con el nombre nuevo o si no se cambio el nombre.
+            if 'afiche' in request.files: # Ver si se quiere agregar/modificar el afiche
+                afic = request.files['afiche']
+                if afic.filename[len(afic.filename)-4:] == '.pdf': # Ver si el archivo de afiche es un pdf
+                    path = os.path.abspath(os.path.dirname(__file__))
+                    if os.path.exists(path[0:len(path)-14]+'/afiches/afiche'+str(session['idevento'])+'.pdf'): # Ver si ya hay un afiche asociado a este evento
+                        os.remove(path[0:len(path)-14]+'/afiches/afiche'+str(session['idevento'])+'.pdf') # Borrarlo si lo hay
+                    evento.nombre = nam
+                    evento.descripcion = des
+                    evento.ubicacion = ubi
+                    evento.fecha = fec
+                    evento.capacidad = cap
+                    evento.disponibilidad = cap - ocupados
+                    afic.save(path[0:len(path)-14]+'/afiches/afiche'+str(evento.idEvent)+'.pdf')
+                    db.session.commit()
+                else:
+                    results[1]['msg'].append('Tipo de archivo no permitido, el afiche debe estar en formato PDF de tamaño menor a 16MB.')
+                    res = results[1]
+            else:
+                evento.nombre = nam
+                evento.descripcion = des
+                evento.ubicacion = ubi
+                evento.fecha = fec
+                evento.capacidad = cap
+                evento.disponibilidad = cap - ocupados
+                db.session.commit()
         else:
             results[1]['msg'].append('Nombre de evento ya existe')
             res = results[1]
@@ -148,7 +166,7 @@ def APersonaAsistio():
     else:
         if reserv.asistio:
             reserv.asistio = False
-            res['msg'] = [ur'Asistencia Desconfirmada']
+            res['msg'] = [ur'Asistencia Anulada']
         else:
             reserv.asistio = True
         db.session.commit()
@@ -206,7 +224,7 @@ def VModificarEvento():
         res['actor']=session['actor']
     #Action code goes here, res should be a JSON structure
 
-    evento = models.Event.query.filter(models.Event.idEvent==session['idevento']).first()
+    evento = models.Event.query.filter(models.Event.idEvent == session['idevento']).first()
     res['fEvento'] = {
         'nombre': evento.nombre,
         'descripcion': evento.descripcion,
@@ -249,8 +267,14 @@ def VVerEvento():
 
     # TODO Intentar relizar consultas mas eficientes
     event = models.Event.query.get(int(session['idevento']))
+    path = os.path.abspath(os.path.dirname(__file__))
+    pdfpath = ''
     e = {'nombre':event.nombre,'descripcion':event.descripcion,'ubicacion':event.ubicacion,'fecha':event.fecha,
-             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad}
+             'capacidad':event.capacidad, 'disponibilidad':event.disponibilidad,'id':event.idEvent}
+    if os.path.exists(path[0:len(path)-14]+'/afiches/afiche'+str(event.idEvent)+'.pdf'):
+        pdfpath = path[0:len(path)-14]+'/afiches/afiche'+str(event.idEvent)+'.pdf'
+        e['path'] = pdfpath
+        e['filename'] = 'afiche'+str(event.idEvent)+'.pdf'
     res['data100'] = e
     p = []
     asistencia = 'Si'
